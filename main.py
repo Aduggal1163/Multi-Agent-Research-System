@@ -7,10 +7,16 @@ from typing_extensions import TypedDict, Annotated
 from typing import Literal
 from pydantic import BaseModel, Field
 import operator
-import json
+import logging
 from dotenv import load_dotenv
 
 load_dotenv()
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(message)s"
+)
+
+logger = logging.getLogger(__name__)
 
 llm = init_chat_model(model='gpt-4o-mini',temperature = 0)
 creative_llm = init_chat_model(model='gpt-4o-mini',temperature = 0.8)
@@ -27,30 +33,43 @@ class ResearchState(TypedDict):
     report: str
     review: str
     score: float
-
+class ResearchQuestion(BaseModel):
+    questions:list[str] = Field(description='Exactly three research questions')
+class QualityReview(BaseModel):
+    score: float = Field(
+        description="Quality score between 0.0 and 1.0"
+    )
+    feedback: str = Field(
+        description="Short explanation of the score"
+    )
 def create_multi_agent_research():
+
     def split_questions(state: ResearchState)->dict:
+        logger.info("Splitter Agent Started")
+
         """User gives one question split it into 3 questions for more detailed answer"""
-        response = llm.invoke(
+        question_llm = llm.with_structured_output(ResearchQuestion)
+
+        response = question_llm.invoke(
             [
                 SystemMessage(content="""
-Given a user's research topic, generate exactly three research questions.
-
-Question 1 should focus on the Market.
-Question 2 should focus on Competitors.
-Question 3 should focus on Technology, Revenue Model, or Future Trends.
-Return ONLY the questions.
-Do not number them.
-Put each question on a new line.
+Generate exactly three research questions.
+Question 1:
+Market
+Question 2:
+Competitors
+Question 3:
+Technology, Revenue Model or Future Trends.
 """),
                 HumanMessage(content=f"Research query is: {state['user_query']}")
             ]
         )
-        questions = [
-            q.strip()
-            for q in response.content.split('\n')
-            if q.strip()
-        ]
+
+        questions = response.questions
+        logger.info(f"Generated {len(questions)} research questions")
+        logger.info("Generating Questions")
+        for i,ques in enumerate(questions,start=1):
+            logger.info(f"Question{i} -> {ques}")
         if len(questions) != 3:
             raise ValueError(
             f"Expected 3 questions but got {len(questions)}"
@@ -61,35 +80,42 @@ Put each question on a new line.
 
 
     def research1(state: ResearchState)->dict:
+        logger.info("Market Agent Started")
         question = state['research_questions'][0]
         response = llm.invoke([
             SystemMessage(content='You are a market research expert. focus only on market size, growth, industory trends and demand'),
             HumanMessage(content=question)
         ])
+        logger.info("Market Agent Ended")
         return {
             'research_results':[response.content]
         }
     def research2(state: ResearchState)->dict:
+            logger.info("Competitor Agent Started")
             question = state['research_questions'][1]
             response = llm.invoke([
                 SystemMessage(content='You are a Competitor Analyst. Focus only on major competitors, strengths, weaknesses and competitive landscape'),
                 HumanMessage(content=question)
             ])
+            logger.info("Competitor Agent Ended")
             return {
                 'research_results':[response.content]
     }
     def research3(state: ResearchState)->dict:
+            logger.info("Innovation&Tech Agent Started")
             question = state['research_questions'][2]
             response = creative_llm.invoke([
                 SystemMessage(content='You are a Innovation and Tech Analyst. Focus only on technology, future trends revenue models and opportunities'),
                 HumanMessage(content=question)
             ])
+            logger.info("Innovation&Tech Agent Ended")
             return {
                 'research_results':[response.content]
     }
 
     def synthesis_analyst(state: ResearchState)->dict:
         """Make entire one solution"""
+        logger.info("Synthesis & Analyst Started")
         responses = state['research_results']
         results = '\n\n'.join(responses)
         response = llm.invoke([
@@ -105,7 +131,7 @@ Put each question on a new line.
                 content=results
             )
         ])
-
+        logger.info("Synthesis & Analyst Ended")
         return {
             'synthesis': response.content
         }
@@ -116,6 +142,7 @@ Put each question on a new line.
 
     def report_writer(state: ResearchState)->dict:
         """Writes a structured research report from the analysis"""
+        logger.info("Report Generation Started")
         response = creative_llm.invoke(
             [
                 SystemMessage(content=(
@@ -133,6 +160,7 @@ Put each question on a new line.
                 ))
             ]
         )
+        logger.info("Report Generation Ended")
         return {
             'report': response.content
         }
@@ -140,16 +168,9 @@ Put each question on a new line.
 # ============================================================
 # Node: Quality Checker — Reviews and scores the report
 # ============================================================
-    class QualityReview(BaseModel):
-        score: float = Field(
-        description="Quality score between 0.0 and 1.0"
-        )
-        feedback: str = Field(
-        description="Short explanation of the score"
-    )
     def quality_check(state: ResearchState) -> dict:
         review_llm = llm.with_structured_output(QualityReview)
-
+        logger.info("Quality Check Started")
         review = review_llm.invoke(
             [
             SystemMessage(
@@ -174,6 +195,8 @@ A score above 0.8 means the report is excellent.
             HumanMessage(content=state["report"])
         ]
     )
+        logger.info("Quality Score: %.2f", review.score)
+        logger.info("Quality Check Ended")
 
         return {
         "score": review.score,
@@ -209,7 +232,12 @@ A score above 0.8 means the report is excellent.
 def demo():
     """working"""
     app = create_multi_agent_research()
-    query = 'what is ai'
+    query = input("Enter your research topic:").strip()
+    if not query:
+        print("Please enter research topic!")
+        return
+    logger.info(f"User query is: {query}")
+    
     print("MULTI AGENT PROJECT DEMO")
     result = app.invoke({
         'messages':[],
@@ -221,6 +249,7 @@ def demo():
         'review':'',
         'score':0.0
     })
+    logger.info("Research Workflow Completed Successfully")
     print("="*80)
     print("QUESTIONS")
     print("="*80)
