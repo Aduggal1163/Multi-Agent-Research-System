@@ -1,6 +1,11 @@
 import os
+import sys
 import re
 from dotenv import load_dotenv
+
+# Ensure Backend directory is in Python path for direct imports
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 from graph import create_multi_agent_research
 from utils.logger import setup_logger
 from database.db import engine, Base, SessionLocal

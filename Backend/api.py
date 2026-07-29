@@ -1,8 +1,14 @@
+import os
+import sys
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
-from fastapi import FastAPI
+
+# Ensure Backend directory is in Python path for direct imports
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 from graph import create_multi_agent_research
-from database.db import get_db
+from database.db import get_db, Base, engine
 from database.crud import (
     create_research_report,
     get_all_research_reports,
@@ -15,9 +21,16 @@ from schemas import (
     ResearchResponse,
 )
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Ensure database tables exist at start
+    Base.metadata.create_all(bind=engine)
+    yield
+
 app = FastAPI(
     title="Multi-Agent Research API",
     description="LangGraph Multi-Agent Research System",
+    lifespan=lifespan,
 )
 workflow = create_multi_agent_research()
 
@@ -72,7 +85,7 @@ def generate_research(
 # Get All Reports
 # =====================================================
 
-@app.get("/reports")
+@app.get("/reports", response_model=list[ResearchResponse])
 def get_reports(
     skip: int = 0,
     limit: int = 100,
@@ -89,7 +102,7 @@ def get_reports(
 # Get One Report
 # =====================================================
 
-@app.get("/reports/{report_id}")
+@app.get("/reports/{report_id}", response_model=ResearchResponse)
 def get_report(
     report_id: int,
     db: Session = Depends(get_db)
@@ -113,7 +126,7 @@ def get_report(
 # Search Reports
 # =====================================================
 
-@app.get("/search")
+@app.get("/search", response_model=list[ResearchResponse])
 def search_reports(
     query: str,
     skip: int = 0,

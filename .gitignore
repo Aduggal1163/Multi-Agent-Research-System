@@ -1,11 +1,22 @@
-# Python-generated files
-__pycache__/
-*.py[oc]
-build/
-dist/
-wheels/
-*.egg-info
+# Python cache files
+**/__pycache__/
+**/*.py[cod]
+**/*$py.class
 
-# Virtual environments
-.venv
+# Environments
+.venv/
+Backend/.venv/
 .env
+Backend/.env
+
+# SQLite databases
+**/*.db
+Backend/*.db
+
+# OS files
+**/.DS_Store
+
+# Node/Frontend dependency folders
+Frontend/node_modules/
+dist/
+build/

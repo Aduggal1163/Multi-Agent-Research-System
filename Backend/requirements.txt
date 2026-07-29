@@ -8,3 +8,5 @@ langgraph>=1.2.9
 python-dotenv>=1.2.2
 tavily-python>=0.7.26
 sqlalchemy>=2.0.51
+fastapi>=0.140.13
+uvicorn>=0.30.1

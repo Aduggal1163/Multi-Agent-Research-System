@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, Float, Text, DateTime
-from datetime import datetime
+from datetime import datetime, timezone
 
 from database.db import Base
 
@@ -23,5 +23,5 @@ class ResearchReport(Base):
 
     created_at = Column(
         DateTime,
-        default=datetime.utcnow
+        default=lambda: datetime.now(timezone.utc)
     )
