@@ -27,6 +27,18 @@ def setup_logger(name: str) -> logging.Logger:
     
     logger.addHandler(ch)
     
+    # Create file handler to write to a centralized log file
+    try:
+        log_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        log_file = os.path.join(log_dir, "research_system.log")
+        fh = logging.FileHandler(log_file, encoding="utf-8")
+        fh.setLevel(logging.INFO)
+        fh.setFormatter(formatter)
+        logger.addHandler(fh)
+    except Exception as e:
+        # Fallback if log file cannot be written
+        print(f"Warning: Failed to setup file log handler: {e}")
+        
     # Prevent logger from propagating to parent loggers (avoiding double output if root logger is setup)
     logger.propagate = False
     
