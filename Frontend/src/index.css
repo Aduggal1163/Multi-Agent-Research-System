@@ -1,49 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
 :root {
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-display: 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 
-  /* Premium HSL Dark Theme Palette */
-  --bg-app: #030712; /* Obsidian black */
-  --bg-sidebar: #090d16; /* Clean dark slate */
-  --bg-card: rgba(17, 24, 39, 0.35); /* Glassmorphic card */
-  --bg-card-hover: rgba(31, 41, 55, 0.5); 
-  --border-glass: rgba(255, 255, 255, 0.06);
-  --border-glass-glow: rgba(99, 102, 241, 0.3);
-  --border-active: rgba(168, 85, 247, 0.4);
+  /* Cyber Cosmic Premium Dark Theme Palette */
+  --bg-app: #030408; /* Ultra obsidian black */
+  --bg-sidebar: #060913; /* Deep space slate */
+  --bg-card: rgba(10, 15, 30, 0.45); /* Glassmorphic card base */
+  --bg-card-hover: rgba(20, 30, 55, 0.6); 
+  --border-glass: rgba(255, 255, 255, 0.05);
+  --border-glass-glow: rgba(139, 92, 246, 0.25);
+  --border-active: rgba(168, 85, 247, 0.55);
   
-  /* Primary HSL hues for gradient control */
-  --hue-indigo: 239;
-  --hue-teal: 172;
-  --hue-purple: 271;
-  --hue-pink: 322;
+  /* HSL Gradients Controls */
+  --hue-indigo: 245;
+  --hue-teal: 180;
+  --hue-purple: 265;
+  --hue-pink: 315;
 
-  --color-primary: hsl(var(--hue-indigo), 84%, 60%);
-  --color-primary-glow: hsla(var(--hue-indigo), 84%, 60%, 0.15);
-  --color-secondary: hsl(var(--hue-teal), 80%, 45%);
-  --color-secondary-glow: hsla(var(--hue-teal), 80%, 45%, 0.15);
-  --color-accent: hsl(var(--hue-purple), 85%, 65%);
-  --color-accent-glow: hsla(var(--hue-purple), 85%, 65%, 0.15);
+  --color-primary: hsl(var(--hue-indigo), 90%, 62%);
+  --color-primary-glow: hsla(var(--hue-indigo), 90%, 62%, 0.15);
+  --color-secondary: hsl(var(--hue-teal), 90%, 48%);
+  --color-secondary-glow: hsla(var(--hue-teal), 90%, 48%, 0.15);
+  --color-accent: hsl(var(--hue-purple), 90%, 68%);
+  --color-accent-glow: hsla(var(--hue-purple), 90%, 68%, 0.15);
+  --color-pink: hsl(var(--hue-pink), 90%, 65%);
   
-  --text-main: #f3f4f6;
-  --text-muted: #9ca3af;
-  --text-dim: #6b7280;
+  --text-main: #f1f5f9; /* Slate 100 */
+  --text-muted: #94a3b8; /* Slate 400 */
+  --text-dim: #64748b; /* Slate 500 */
   
-  --status-idle: #6b7280;
+  --status-idle: #64748b;
   --status-active: #3b82f6;
   --status-success: #10b981;
   --status-warning: #f59e0b;
   --status-error: #ef4444;
 
-  --shadow-glow: 0 0 25px rgba(99, 102, 241, 0.12);
-  --shadow-glow-strong: 0 0 40px rgba(168, 85, 247, 0.25);
-  --shadow-card: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 30px hsla(var(--hue-indigo), 90%, 62%, 0.15);
+  --shadow-glow-strong: 0 0 50px hsla(var(--hue-purple), 90%, 68%, 0.3);
+  --shadow-card: 0 16px 45px 0 rgba(0, 0, 0, 0.65);
   
-  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-normal: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 
   /* Special Gradients */
-  --gradient-brand: linear-gradient(135deg, hsl(var(--hue-indigo), 85%, 65%) 0%, hsl(var(--hue-purple), 85%, 65%) 50%, hsl(var(--hue-pink), 85%, 65%) 100%);
+  --gradient-brand: linear-gradient(135deg, hsl(var(--hue-indigo), 90%, 62%) 0%, hsl(var(--hue-purple), 90%, 68%) 50%, hsl(var(--hue-pink), 90%, 65%) 100%);
+  --gradient-neon-cyan: linear-gradient(135deg, #06b6d4 0%, #0d9488 100%);
   --gradient-green: linear-gradient(135deg, #10b981 0%, #059669 100%);
   --gradient-orange: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
   --gradient-red: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
@@ -68,12 +73,12 @@ body {
 
 /* Custom Scrollbars */
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.25);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -83,12 +88,13 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.18);
+  background: var(--color-primary-glow);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 /* Selection highlight */
 ::selection {
-  background-color: hsla(var(--hue-purple), 85%, 65%, 0.25);
+  background-color: hsla(var(--hue-purple), 90%, 68%, 0.3);
   color: #ffffff;
 }
 
@@ -102,102 +108,110 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Markdown rendering styling overrides */
 .markdown-body {
-  line-height: 1.75;
-  font-size: 0.98rem;
-  color: #d1d5db;
+  line-height: 1.8;
+  font-size: 1rem;
+  color: #cbd5e1;
 }
 
 .markdown-body h1, .markdown-body h2, .markdown-body h3 {
-  margin-top: 1.85rem;
-  margin-bottom: 0.85rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
   color: #ffffff;
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: -0.02em;
 }
 
 .markdown-body h1 {
-  font-size: 1.6rem;
-  background: linear-gradient(135deg, #ffffff 40%, #a5b4fc 100%);
+  font-size: 1.75rem;
+  background: linear-gradient(135deg, #ffffff 40%, #c084fc 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  padding-bottom: 0.35rem;
+  padding-bottom: 0.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .markdown-body h2 {
-  font-size: 1.35rem;
-  border-left: 3px solid var(--color-primary);
-  padding-left: 0.75rem;
+  font-size: 1.45rem;
+  border-left: 4px solid var(--color-primary);
+  padding-left: 0.85rem;
+  margin-top: 2.2rem;
 }
 
 .markdown-body h3 {
-  font-size: 1.15rem;
-  color: var(--text-main);
+  font-size: 1.2rem;
+  color: #f1f5f9;
+  border-left: 3px solid var(--color-secondary);
+  padding-left: 0.65rem;
 }
 
 .markdown-body p {
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.4rem;
 }
 
 .markdown-body ul, .markdown-body ol {
-  margin-bottom: 1.2rem;
-  padding-left: 1.5rem;
+  margin-bottom: 1.4rem;
+  padding-left: 1.6rem;
 }
 
 .markdown-body li {
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
   position: relative;
 }
 
 .markdown-body code {
-  font-family: 'Fira Code', 'Courier New', Courier, monospace;
-  background-color: rgba(255, 255, 255, 0.05);
-  padding: 0.18rem 0.4rem;
+  font-family: var(--font-mono);
+  background-color: rgba(15, 23, 42, 0.6);
+  padding: 0.2rem 0.45rem;
   border-radius: 6px;
   font-size: 0.85em;
   color: #c084fc;
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  text-shadow: 0 0 5px rgba(168, 85, 247, 0.15);
 }
 
 .markdown-body blockquote {
   border-left: 4px solid var(--color-accent);
-  padding: 0.5rem 1.25rem;
+  padding: 0.75rem 1.5rem;
   background: rgba(168, 85, 247, 0.03);
   color: var(--text-muted);
   font-style: italic;
-  margin: 1.5rem 0;
-  border-radius: 0 8px 8px 0;
+  margin: 1.75rem 0;
+  border-radius: 0 10px 10px 0;
+  border: 1px solid rgba(168, 85, 247, 0.08);
+  border-left-width: 4px;
 }
 
 .markdown-body hr {
   border: 0;
   border-top: 1px solid var(--border-glass);
-  margin: 2rem 0;
+  margin: 2.5rem 0;
 }
 
 /* Custom Markdown Table Styling */
 .markdown-body table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1.5rem 0;
+  margin: 1.75rem 0;
   overflow: hidden;
   border-radius: 12px;
   border: 1px solid var(--border-glass);
+  background-color: rgba(6, 9, 19, 0.4);
 }
 
 .markdown-body th, .markdown-body td {
-  padding: 0.85rem 1rem;
+  padding: 1rem 1.2rem;
   text-align: left;
   border-bottom: 1px solid var(--border-glass);
 }
 
 .markdown-body th {
-  background-color: rgba(255, 255, 255, 0.03);
+  background-color: rgba(255, 255, 255, 0.02);
   color: #ffffff;
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.9rem;
+  letter-spacing: 0.02em;
 }
 
 .markdown-body td {

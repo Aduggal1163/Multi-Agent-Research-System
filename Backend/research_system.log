@@ -1,0 +1,160 @@
+2026-07-30 20:36:16,562 | api | INFO | Compiling workflow graph...
+2026-07-30 20:36:16,562 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-30 20:36:16,563 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-30 20:36:16,563 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-30 20:36:16,563 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-30 20:36:16,563 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-30 20:36:16,563 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-30 20:36:16,563 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-30 20:36:16,563 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-30 20:36:16,563 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-30 20:36:16,563 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-30 20:36:16,563 | graph | INFO | Registering connecting edges in the graph:
+2026-07-30 20:36:16,563 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-30 20:36:16,563 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-30 20:36:16,563 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-30 20:36:16,563 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-30 20:36:16,563 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-30 20:36:16,563 | graph | INFO | Compiling workflow graph successfully
+2026-07-30 20:36:16,566 | api | INFO | Workflow graph compiled successfully.
+2026-07-30 20:36:16,571 | api | INFO | Starting up FastAPI application...
+2026-07-30 20:36:16,571 | api | INFO | Initializing database tables if not existing...
+2026-07-30 20:36:16,575 | api | INFO | Database tables initialized successfully.
+2026-07-30 20:36:36,992 | api | INFO | API: GET /reports called (skip=0, limit=100)
+2026-07-30 20:36:36,995 | api | INFO | API: Retrieved 3 research reports from database
+2026-07-30 20:36:36,997 | api | INFO | API: GET /reports called (skip=0, limit=100)
+2026-07-30 20:36:36,997 | api | INFO | API: Retrieved 3 research reports from database
+2026-07-30 20:36:56,804 | api | INFO | API: GET /reports called (skip=0, limit=100)
+2026-07-30 20:36:56,804 | api | INFO | API: Retrieved 3 research reports from database
+2026-07-30 20:36:56,805 | api | INFO | API: GET /reports called (skip=0, limit=100)
+2026-07-30 20:36:56,806 | api | INFO | API: Retrieved 3 research reports from database
+2026-07-30 20:38:56,835 | api | INFO | API: GET /reports called (skip=0, limit=100)
+2026-07-30 20:38:56,836 | api | INFO | API: Retrieved 3 research reports from database
+2026-07-30 20:45:35,545 | api | INFO | API: GET /reports called (skip=0, limit=100)
+2026-07-30 20:45:35,547 | api | INFO | API: Retrieved 3 research reports from database
+2026-07-30 20:45:35,550 | api | INFO | API: GET /reports called (skip=0, limit=100)
+2026-07-30 20:45:35,551 | api | INFO | API: Retrieved 3 research reports from database
+2026-07-30 20:48:52,092 | api | INFO | API: POST /research called with query: 'Quantum Cryptography Standards'
+2026-07-30 20:48:52,092 | api | INFO | API: Initiating LangGraph research workflow for query: 'Quantum Cryptography Standards'
+2026-07-30 20:48:52,142 | agents.splitter | INFO | Splitter Agent started processing user query: 'Quantum Cryptography Standards'
+2026-07-30 20:48:52,146 | agents.splitter | INFO | Invoking LLM to split user query into 3 distinct research questions...
+2026-07-30 20:49:02,299 | agents.splitter | INFO | Successfully generated 3 questions
+2026-07-30 20:49:02,299 | agents.splitter | INFO |   Question 1: What are the current market trends and demands for quantum cryptography standards in various industries?
+2026-07-30 20:49:02,299 | agents.splitter | INFO |   Question 2: Who are the key competitors in the development and implementation of quantum cryptography standards, and what differentiates their approaches?
+2026-07-30 20:49:02,299 | agents.splitter | INFO |   Question 3: What emerging technologies and revenue models are influencing the future trends of quantum cryptography standards?
+2026-07-30 20:49:02,300 | agents.market | INFO | Market Agent started processing research task
+2026-07-30 20:49:02,300 | agents.market | INFO | Market analysis target question: 'What are the current market trends and demands for quantum cryptography standards in various industries?'
+2026-07-30 20:49:02,301 | agents.market | INFO | Invoking Tavily Search for market research...
+2026-07-30 20:49:02,301 | agents.competitor | INFO | Competitor Agent started processing research task
+2026-07-30 20:49:02,301 | agents.innovation | INFO | Innovation & Tech Agent started processing research task
+2026-07-30 20:49:02,302 | agents.competitor | INFO | Competitor analysis target question: 'Who are the key competitors in the development and implementation of quantum cryptography standards, and what differentiates their approaches?'
+2026-07-30 20:49:02,302 | agents.innovation | INFO | Innovation analysis target question: 'What emerging technologies and revenue models are influencing the future trends of quantum cryptography standards?'
+2026-07-30 20:49:02,302 | agents.competitor | INFO | Invoking Tavily Search for competitor research...
+2026-07-30 20:49:02,302 | agents.innovation | INFO | Invoking Tavily Search for technology trends research...
+2026-07-30 20:49:04,873 | agents.innovation | INFO | Tavily search completed successfully with results length: 12409 chars
+2026-07-30 20:49:04,873 | agents.innovation | INFO | Invoking Creative LLM to analyze search findings...
+2026-07-30 20:49:05,567 | agents.competitor | INFO | Tavily search completed successfully with results length: 12222 chars
+2026-07-30 20:49:05,567 | agents.competitor | INFO | Invoking Competitor LLM to analyze search findings...
+2026-07-30 20:49:11,637 | agents.market | INFO | Tavily search completed successfully with results length: 12202 chars
+2026-07-30 20:49:11,637 | agents.market | INFO | Invoking Market LLM to analyze search findings...
+2026-07-30 20:49:13,758 | agents.innovation | INFO | Innovation analysis completed. Generated output size: 3640 characters
+2026-07-30 20:49:18,755 | agents.competitor | INFO | Competitor analysis completed. Generated output size: 3640 characters
+2026-07-30 20:49:22,145 | agents.market | INFO | Market analysis completed. Generated output size: 2507 characters
+2026-07-30 20:49:22,147 | agents.synthesis | INFO | Synthesis & Analyst Agent started processing collected research results
+2026-07-30 20:49:22,147 | agents.synthesis | INFO | Retrieved 3 individual research agent response(s) to synthesize
+2026-07-30 20:49:22,147 | agents.synthesis | INFO | Aggregated text size for synthesis: 9791 characters
+2026-07-30 20:49:22,147 | agents.synthesis | INFO | Invoking LLM to synthesize research findings into high-level analysis...
+2026-07-30 20:49:27,391 | agents.synthesis | INFO | Synthesis successfully completed. Output size: 2476 characters
+2026-07-30 20:49:27,392 | agents.report | INFO | Report Writer Agent started drafting initial report (Current Iteration: 0)
+2026-07-30 20:49:27,392 | agents.report | INFO | Synthesized Analysis size: 2476 characters
+2026-07-30 20:49:27,392 | agents.report | INFO | Invoking LLM to write initial structured research report...
+2026-07-30 20:49:36,318 | agents.report | INFO | Draft report generation complete. Generated report size: 3085 characters. Next iteration sequence set to: 1
+2026-07-30 20:49:36,320 | agents.reviewer | INFO | Quality Checker Agent started evaluating report (Current Iteration: 1)
+2026-07-30 20:49:36,320 | agents.reviewer | INFO | Report size for evaluation: 3085 characters
+2026-07-30 20:49:36,320 | agents.reviewer | INFO | Invoking LLM to perform quality review evaluation...
+2026-07-30 20:49:37,724 | agents.reviewer | INFO | Quality Checker evaluation finished:
+2026-07-30 20:49:37,724 | agents.reviewer | INFO |   Assigned Score: 0.85
+2026-07-30 20:49:37,724 | agents.reviewer | INFO |   Assigned Feedback: 'The report is comprehensive and provides a thorough analysis of the quantum cryptography market, including key findings and actionable recommendations. However, some areas could benefit from clearer definitions and examples to enhance understanding, particularly regarding the implications of regulatory pressures and market discrepancies.'
+2026-07-30 20:49:37,724 | agents.reviewer | INFO | Review Router making routing decision:
+2026-07-30 20:49:37,724 | agents.reviewer | INFO |   Current Iteration: 1 / Maximum Iterations: 3
+2026-07-30 20:49:37,724 | agents.reviewer | INFO |   Current Quality Score: 0.85 / Target Quality Score: 0.80
+2026-07-30 20:49:37,724 | agents.reviewer | INFO |   Route Action: END (Reason: Target quality score met/exceeded)
+2026-07-30 20:49:37,726 | api | INFO | API: Research workflow completed. Score: 0.85, Iterations: 1
+2026-07-30 20:49:37,726 | api | INFO | API: Writing results to the database...
+2026-07-30 20:49:37,733 | api | INFO | API: Research report successfully saved with ID: 4
+2026-07-30 20:54:37,469 | api | INFO | API: GET /reports called (skip=0, limit=100)
+2026-07-30 20:54:37,471 | api | INFO | API: Retrieved 4 research reports from database
+2026-07-30 20:54:37,472 | api | INFO | API: GET /reports called (skip=0, limit=100)
+2026-07-30 20:54:37,473 | api | INFO | API: Retrieved 4 research reports from database
+2026-07-30 20:58:47,470 | main | INFO | Multi-agent research CLI demo initialized
+2026-07-30 20:58:47,470 | main | INFO | Creating database tables if they do not exist...
+2026-07-30 20:58:47,471 | main | INFO | Database tables initialized successfully
+2026-07-30 20:58:47,471 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-30 20:58:47,471 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-30 20:58:47,471 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-30 20:58:47,471 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-30 20:58:47,471 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-30 20:58:47,471 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-30 20:58:47,471 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-30 20:58:47,471 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-30 20:58:47,471 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-30 20:58:47,471 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-30 20:58:47,472 | graph | INFO | Registering connecting edges in the graph:
+2026-07-30 20:58:47,472 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-30 20:58:47,472 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-30 20:58:47,472 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-30 20:58:47,472 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-30 20:58:47,472 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-30 20:58:47,472 | graph | INFO | Compiling workflow graph successfully
+2026-07-30 20:58:56,027 | api | INFO | API: GET /reports called (skip=0, limit=100)
+2026-07-30 20:58:56,028 | api | INFO | API: Retrieved 4 research reports from database
+2026-07-30 20:58:56,031 | api | INFO | API: GET /reports called (skip=0, limit=100)
+2026-07-30 20:58:56,031 | api | INFO | API: Retrieved 4 research reports from database
+2026-07-30 20:59:03,296 | api | INFO | API: POST /research called with query: 'Commercial Fusion Energy'
+2026-07-30 20:59:03,296 | api | INFO | API: Initiating LangGraph research workflow for query: 'Commercial Fusion Energy'
+2026-07-30 20:59:03,300 | agents.splitter | INFO | Splitter Agent started processing user query: 'Commercial Fusion Energy'
+2026-07-30 20:59:03,301 | agents.splitter | INFO | Invoking LLM to split user query into 3 distinct research questions...
+2026-07-30 20:59:06,240 | agents.splitter | INFO | Successfully generated 3 questions
+2026-07-30 20:59:06,240 | agents.splitter | INFO |   Question 1: What is the current market landscape for commercial fusion energy, including key players and market size projections?
+2026-07-30 20:59:06,240 | agents.splitter | INFO |   Question 2: Who are the main competitors in the commercial fusion energy sector, and what are their unique value propositions and technological advancements?
+2026-07-30 20:59:06,240 | agents.splitter | INFO |   Question 3: What emerging technologies and revenue models are being explored in the commercial fusion energy industry, and what future trends could impact its development and adoption?
+2026-07-30 20:59:06,242 | agents.market | INFO | Market Agent started processing research task
+2026-07-30 20:59:06,242 | agents.competitor | INFO | Competitor Agent started processing research task
+2026-07-30 20:59:06,242 | agents.market | INFO | Market analysis target question: 'What is the current market landscape for commercial fusion energy, including key players and market size projections?'
+2026-07-30 20:59:06,243 | agents.innovation | INFO | Innovation & Tech Agent started processing research task
+2026-07-30 20:59:06,243 | agents.competitor | INFO | Competitor analysis target question: 'Who are the main competitors in the commercial fusion energy sector, and what are their unique value propositions and technological advancements?'
+2026-07-30 20:59:06,243 | agents.market | INFO | Invoking Tavily Search for market research...
+2026-07-30 20:59:06,243 | agents.innovation | INFO | Innovation analysis target question: 'What emerging technologies and revenue models are being explored in the commercial fusion energy industry, and what future trends could impact its development and adoption?'
+2026-07-30 20:59:06,243 | agents.competitor | INFO | Invoking Tavily Search for competitor research...
+2026-07-30 20:59:06,244 | agents.innovation | INFO | Invoking Tavily Search for technology trends research...
+2026-07-30 20:59:08,801 | agents.market | INFO | Tavily search completed successfully with results length: 12113 chars
+2026-07-30 20:59:08,801 | agents.market | INFO | Invoking Market LLM to analyze search findings...
+2026-07-30 20:59:09,089 | agents.competitor | INFO | Tavily search completed successfully with results length: 12626 chars
+2026-07-30 20:59:09,089 | agents.competitor | INFO | Invoking Competitor LLM to analyze search findings...
+2026-07-30 20:59:11,262 | agents.innovation | INFO | Tavily search completed successfully with results length: 12177 chars
+2026-07-30 20:59:11,262 | agents.innovation | INFO | Invoking Creative LLM to analyze search findings...
+2026-07-30 20:59:15,915 | agents.market | INFO | Market analysis completed. Generated output size: 3260 characters
+2026-07-30 20:59:17,606 | agents.competitor | INFO | Competitor analysis completed. Generated output size: 3460 characters
+2026-07-30 20:59:19,074 | agents.innovation | INFO | Innovation analysis completed. Generated output size: 4837 characters
+2026-07-30 20:59:19,075 | agents.synthesis | INFO | Synthesis & Analyst Agent started processing collected research results
+2026-07-30 20:59:19,075 | agents.synthesis | INFO | Retrieved 3 individual research agent response(s) to synthesize
+2026-07-30 20:59:19,075 | agents.synthesis | INFO | Aggregated text size for synthesis: 11561 characters
+2026-07-30 20:59:19,075 | agents.synthesis | INFO | Invoking LLM to synthesize research findings into high-level analysis...
+2026-07-30 20:59:23,088 | agents.synthesis | INFO | Synthesis successfully completed. Output size: 2295 characters
+2026-07-30 20:59:23,089 | agents.report | INFO | Report Writer Agent started drafting initial report (Current Iteration: 0)
+2026-07-30 20:59:23,089 | agents.report | INFO | Synthesized Analysis size: 2295 characters
+2026-07-30 20:59:23,089 | agents.report | INFO | Invoking LLM to write initial structured research report...
+2026-07-30 20:59:29,152 | agents.report | INFO | Draft report generation complete. Generated report size: 3157 characters. Next iteration sequence set to: 1
+2026-07-30 20:59:29,154 | agents.reviewer | INFO | Quality Checker Agent started evaluating report (Current Iteration: 1)
+2026-07-30 20:59:29,155 | agents.reviewer | INFO | Report size for evaluation: 3157 characters
+2026-07-30 20:59:29,155 | agents.reviewer | INFO | Invoking LLM to perform quality review evaluation...
+2026-07-30 20:59:30,532 | agents.reviewer | INFO | Quality Checker evaluation finished:
+2026-07-30 20:59:30,532 | agents.reviewer | INFO |   Assigned Score: 0.85
+2026-07-30 20:59:30,532 | agents.reviewer | INFO |   Assigned Feedback: 'The report is comprehensive and provides a thorough analysis of the commercial fusion energy market, including key findings and actionable recommendations. However, some sections could benefit from clearer definitions and examples to enhance understanding for a broader audience.'
+2026-07-30 20:59:30,535 | agents.reviewer | INFO | Review Router making routing decision:
+2026-07-30 20:59:30,536 | agents.reviewer | INFO |   Current Iteration: 1 / Maximum Iterations: 3
+2026-07-30 20:59:30,536 | agents.reviewer | INFO |   Current Quality Score: 0.85 / Target Quality Score: 0.80
+2026-07-30 20:59:30,536 | agents.reviewer | INFO |   Route Action: END (Reason: Target quality score met/exceeded)
+2026-07-30 20:59:30,538 | api | INFO | API: Research workflow completed. Score: 0.85, Iterations: 1
+2026-07-30 20:59:30,538 | api | INFO | API: Writing results to the database...
+2026-07-30 20:59:30,542 | api | INFO | API: Research report successfully saved with ID: 5

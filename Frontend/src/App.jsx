@@ -3,7 +3,7 @@ import {
   Search, Plus, TrendingUp, Trash2, Download, 
   Compass, FileText, Database, Cpu, Award, 
   Terminal, Calendar, ChevronRight, Sparkles, 
-  Layers, CheckCircle2, AlertCircle
+  Layers, CheckCircle2, AlertCircle, Menu, Copy
 } from 'lucide-react';
 import './App.css';
 
@@ -69,6 +69,8 @@ export default function App() {
   const [activeStep, setActiveStep] = useState(0);
   const [activeTab, setActiveTab] = useState('synthesis');
   const [error, setError] = useState('');
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const steps = [
     { label: "Deconstructing topic and formulating questions", agent: "Splitter Agent" },
@@ -206,6 +208,30 @@ ${report.review || "No review feedback logged."}
     document.body.removeChild(link);
   };
 
+  // Copy report to clipboard
+  const handleCopy = (report) => {
+    const content = `# Research Report: ${report.query}
+ 
+**Quality Score:** ${(report.score * 100).toFixed(0)}%
+**Refinement Iterations:** ${report.iterations}
+**Date:** ${new Date(report.created_at).toLocaleDateString()}
+ 
+---
+ 
+## Executive Synthesized Analysis
+${report.synthesis}
+ 
+---
+ 
+## Detailed Report
+${report.report}
+`;
+    navigator.clipboard.writeText(content).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
   const sampleTopics = [
     { title: "Commercial Fusion Energy", desc: "Timeline, players, and technical hurdles.", icon: Compass },
     { title: "Quantum Cryptography Standards", desc: "Post-quantum algorithms & market adoption.", icon: Sparkles },
@@ -220,14 +246,14 @@ ${report.review || "No review feedback logged."}
       <div className="ambient-glow orb-3"></div>
 
       {/* SIDEBAR NAVIGATION */}
-      <aside className="sidebar">
+      <aside className={`sidebar ${sidebarCollapsed ? 'collapsed' : ''}`}>
         <div className="sidebar-header">
-          <Cpu className="brand-icon" size={24} />
+          <Cpu className="brand-icon" size={20} />
           <h1>InsightFlow</h1>
         </div>
 
         <div className="sidebar-search-container">
-          <Search className="search-icon-inside" size={16} />
+          <Search className="search-icon-inside" size={15} />
           <input 
             type="text" 
             placeholder="Search reports history..." 
@@ -286,6 +312,25 @@ ${report.review || "No review feedback logged."}
 
       {/* MAIN LAYOUT */}
       <main className="main-content">
+        {/* Top Status and collapse Header bar */}
+        <header className="top-status-bar">
+          <button 
+            className="sidebar-toggle-btn"
+            onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+            title={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+          >
+            <Menu size={16} />
+          </button>
+          
+          <div className="top-bar-right">
+            <span className="system-mode-tag">insight_swarm_v1.0</span>
+            <div className="swarm-status">
+              <span className={`swarm-dot ${isLoading ? 'pulse' : ''}`}></span>
+              <span>Swarm Core: {isLoading ? "Processing" : "Standby"}</span>
+            </div>
+          </div>
+        </header>
+
         {error && (
           <div className="alert-popup">
             <AlertCircle size={20} />
@@ -303,6 +348,44 @@ ${report.review || "No review feedback logged."}
             </div>
             <h3 className="loading-status-title">Assembling Intelligence Report</h3>
             <p className="loading-status-subtitle">"{query}"</p>
+
+            {/* Neural Connection SVG map */}
+            <div className="swarm-network-visualizer">
+              <svg className="swarm-nodes-svg" viewBox="0 0 420 100">
+                {/* Connection lines from Splitter to parallel research nodes */}
+                <line x1="50" y1="50" x2="160" y2="20" className={`swarm-line ${activeStep >= 1 ? 'swarm-line-active' : ''}`} />
+                <line x1="50" y1="50" x2="160" y2="50" className={`swarm-line ${activeStep >= 1 ? 'swarm-line-active' : ''}`} />
+                <line x1="50" y1="50" x2="160" y2="80" className={`swarm-line ${activeStep >= 1 ? 'swarm-line-active' : ''}`} />
+                
+                {/* Connection lines from research nodes to synthesis node */}
+                <line x1="160" y1="20" x2="270" y2="50" className={`swarm-line ${activeStep >= 2 ? 'swarm-line-active' : ''}`} />
+                <line x1="160" y1="50" x2="270" y2="50" className={`swarm-line ${activeStep >= 2 ? 'swarm-line-active' : ''}`} />
+                <line x1="160" y1="80" x2="270" y2="50" className={`swarm-line ${activeStep >= 2 ? 'swarm-line-active' : ''}`} />
+                
+                {/* Connection line from synthesis to report output node */}
+                <line x1="270" y1="50" x2="370" y2="50" className={`swarm-line ${activeStep >= 3 ? 'swarm-line-active' : ''}`} />
+
+                {/* Pulse Rings */}
+                {activeStep === 0 && <circle cx="50" cy="50" r="10" className="swarm-node-pulse" />}
+                {activeStep === 1 && (
+                  <>
+                    <circle cx="160" cy="20" r="10" className="swarm-node-pulse" />
+                    <circle cx="160" cy="50" r="10" className="swarm-node-pulse" />
+                    <circle cx="160" cy="80" r="10" className="swarm-node-pulse" />
+                  </>
+                )}
+                {activeStep === 2 && <circle cx="270" cy="50" r="10" className="swarm-node-pulse" />}
+                {activeStep >= 3 && <circle cx="370" cy="50" r="10" className="swarm-node-pulse" />}
+
+                {/* Node Circles */}
+                <circle cx="50" cy="50" r="8" className={`swarm-node-circle ${activeStep === 0 ? 'active' : activeStep > 0 ? 'completed' : ''}`} />
+                <circle cx="160" cy="20" r="8" className={`swarm-node-circle ${activeStep === 1 ? 'active' : activeStep > 1 ? 'completed' : ''}`} />
+                <circle cx="160" cy="50" r="8" className={`swarm-node-circle ${activeStep === 1 ? 'active' : activeStep > 1 ? 'completed' : ''}`} />
+                <circle cx="160" cy="80" r="8" className={`swarm-node-circle ${activeStep === 1 ? 'active' : activeStep > 1 ? 'completed' : ''}`} />
+                <circle cx="270" cy="50" r="8" className={`swarm-node-circle ${activeStep === 2 ? 'active' : activeStep > 2 ? 'completed' : ''}`} />
+                <circle cx="370" cy="50" r="8" className={`swarm-node-circle ${activeStep >= 3 ? 'active' : ''}`} />
+              </svg>
+            </div>
 
             <div className="steps-tracker">
               {steps.map((step, idx) => {
@@ -333,7 +416,7 @@ ${report.review || "No review feedback logged."}
                     </div>
                     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                       <div className={`step-label ${labelClass}`}>{step.label}</div>
-                      <div style={{ fontSize: '0.74rem', color: 'var(--text-dim)', fontWeight: 500 }}>{step.agent}</div>
+                      <div className="step-agent-badge">{step.agent}</div>
                       {isActive && (
                         <div className="step-log-text">
                           <span className="typing-dot"></span>
@@ -470,6 +553,10 @@ ${report.review || "No review feedback logged."}
                 <Trash2 size={14} />
                 <span>Delete Run</span>
               </button>
+              <button className="action-btn action-btn-secondary" onClick={() => handleCopy(activeReport)}>
+                <Copy size={14} />
+                <span>Copy Markdown</span>
+              </button>
               <button className="action-btn action-btn-secondary" onClick={() => handleExport(activeReport)}>
                 <Download size={14} />
                 <span>Export Markdown</span>
@@ -532,6 +619,14 @@ ${report.review || "No review feedback logged."}
           </div>
         )}
       </main>
+
+      {/* Copy notification toast overlay */}
+      {copied && (
+        <div className="copy-toast">
+          <CheckCircle2 size={16} style={{ strokeWidth: 3 }} />
+          <span>Report copied to clipboard!</span>
+        </div>
+      )}
     </div>
   );
 }
