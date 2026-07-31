@@ -198,10 +198,15 @@ export default function App() {
 
   const searchInputRef = useRef(null);
   const fileInputRef = useRef(null);
-  const chatBottomRef = useRef(null);
+  const chatViewportRef = useRef(null);
 
   useEffect(() => {
-    chatBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (chatViewportRef.current) {
+      chatViewportRef.current.scrollTo({
+        top: chatViewportRef.current.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
   }, [chatMessages, isChatLoading]);
 
   useEffect(() => {
@@ -757,7 +762,7 @@ ${report.report}
 
                 {docExplorerTab === 'chat' && (
                   <div className="chat-container">
-                    <div className="chat-messages-viewport">
+                    <div className="chat-messages-viewport" ref={chatViewportRef}>
                       {chatMessages.map((msg, idx) => (
                         <div key={idx} className={`chat-bubble ${msg.sender === 'user' ? 'chat-bubble-user' : 'chat-bubble-ai'}`}>
                           <div>{msg.text}</div>
@@ -776,7 +781,6 @@ ${report.report}
                           <span className="typing-dot"></span> Analyzing question for {selectedDoc.title}...
                         </div>
                       )}
-                      <div ref={chatBottomRef} />
                     </div>
 
                     <div className="chat-input-bar">

@@ -874,3 +874,26 @@ sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) NOT NULL constraint fail
 2026-07-31 19:46:19,223 | api | INFO | API: POST /upload called for filename: 'AbhishekDuggal-Resume.pdf'
 2026-07-31 19:46:19,224 | api | INFO | Saved upload to /Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/uploads/AbhishekDuggal-Resume.pdf
 2026-07-31 19:46:20,334 | api | INFO | InMemoryVectorStore indexing completed for AbhishekDuggal-Resume.pdf
+2026-07-31 19:50:29,240 | main | INFO | Multi-agent research CLI demo initialized
+2026-07-31 19:50:29,240 | main | INFO | Creating database tables if they do not exist...
+2026-07-31 19:50:29,241 | main | INFO | Database tables initialized successfully
+2026-07-31 19:50:29,241 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 19:50:29,241 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 19:50:29,241 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 19:50:29,241 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 19:50:29,241 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 19:50:29,241 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 19:50:29,241 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 19:50:29,241 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 19:50:29,241 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 19:50:29,241 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 19:50:29,241 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 19:50:29,241 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 19:50:29,241 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 19:50:29,241 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 19:50:29,241 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 19:50:29,241 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 19:50:29,242 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 19:50:39,300 | api | INFO | API: POST /upload called for filename: 'AbhishekDuggal-Resume.pdf'
+2026-07-31 19:50:39,300 | api | INFO | Saved upload to /Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/uploads/AbhishekDuggal-Resume.pdf
+2026-07-31 19:50:40,526 | api | INFO | InMemoryVectorStore indexing completed for AbhishekDuggal-Resume.pdf
