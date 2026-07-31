@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Sidebar } from './components/layout/Sidebar';
-import { Header } from './components/layout/Header';
+import { NavbarDock } from './components/layout/NavbarDock';
 import { Toast } from './components/layout/Toast';
+import { LandingPage } from './components/landing/LandingPage';
 import { ResearchInput } from './components/research/ResearchInput';
 import { SwarmMonitor } from './components/research/SwarmMonitor';
 import { ReportViewer } from './components/research/ReportViewer';
@@ -18,8 +18,7 @@ import { useResearch } from './hooks/useResearch';
 import { useKnowledgeBase } from './hooks/useKnowledgeBase';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('workspace');
-  const [collapsed, setCollapsed] = useState(false);
+  const [activeTab, setActiveTab] = useState('landing');
   const [searchTerm, setSearchTerm] = useState('');
   const [isDemoMode, setIsDemoMode] = useState(false);
 
@@ -31,7 +30,6 @@ export default function App() {
   
   const {
     history,
-    setHistory,
     activeReport,
     setActiveReport,
     isGenerating,
@@ -45,7 +43,6 @@ export default function App() {
 
   const {
     documents,
-    setDocuments,
     selectedDoc,
     setSelectedDoc,
     isUploading,
@@ -53,76 +50,43 @@ export default function App() {
     removeDocument
   } = useKnowledgeBase(showToast, isDemoMode);
 
-  const pinnedReports = history.filter(h => pinnedIds.includes(h.id));
+  const handleStartResearch = (topicQuery) => {
+    setActiveTab('workspace');
+    startResearch(topicQuery);
+  };
 
   const handleNewResearchClick = () => {
     setActiveTab('workspace');
     setActiveReport(null);
   };
 
-  const handleExportWorkspace = () => {
-    const backupData = {
-      app: 'InsightFlow Multi-Agent System',
-      timestamp: new Date().toISOString(),
-      history,
-      documents,
-      pinnedIds
-    };
-    const blob = new Blob([JSON.stringify(backupData, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `insightflow_workspace_backup_${Date.now()}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
-    showToast('Workspace backup JSON exported!');
-  };
-
-  const handleImportWorkspace = (file) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const data = JSON.parse(e.target.result);
-        if (data.history) setHistory(data.history);
-        if (data.documents) setDocuments(data.documents);
-        showToast('Workspace state restored from JSON backup!');
-      } catch (err) {
-        showToast('Invalid backup JSON file', 'error');
-      }
-    };
-    reader.readAsText(file);
-  };
-
   return (
-    <div className="app-shell">
-      {/* Collapsible Navigation Sidebar */}
-      <Sidebar 
+    <div className="app-shell" style={{ flexDirection: 'column' }}>
+      {/* Top Floating Glass Navigation Dock */}
+      <NavbarDock 
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        collapsed={collapsed}
-        setCollapsed={setCollapsed}
-        pinnedReports={pinnedReports}
-        setActiveReport={setActiveReport}
         documentsCount={documents.length}
         reportsCount={history.length}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        isDemoMode={isDemoMode}
+        setIsDemoMode={setIsDemoMode}
+        onUploadClick={() => setActiveTab('knowledge')}
         onNewResearch={handleNewResearchClick}
       />
 
-      {/* Main Workspace Area */}
+      {/* Main Page Viewport */}
       <main className="app-main">
-        <Header 
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          onUploadClick={() => setActiveTab('knowledge')}
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          isDemoMode={isDemoMode}
-          setIsDemoMode={setIsDemoMode}
-          onExportWorkspace={handleExportWorkspace}
-          onImportWorkspace={handleImportWorkspace}
-        />
-
         <div className="app-content">
+          {activeTab === 'landing' && (
+            <LandingPage 
+              onLaunchWorkspace={() => setActiveTab('workspace')}
+              onLaunchKnowledge={() => setActiveTab('knowledge')}
+              onStartSampleTopic={(topic) => handleStartResearch(topic)}
+            />
+          )}
+
           {activeTab === 'workspace' && (
             <div>
               <ResearchInput 
