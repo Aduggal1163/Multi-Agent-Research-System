@@ -159,3 +159,718 @@
 2026-07-30 20:59:30,538 | api | INFO | API: Writing results to the database...
 2026-07-30 20:59:30,542 | api | INFO | API: Research report successfully saved with ID: 5
 2026-07-30 23:39:04,119 | api | INFO | Shutting down FastAPI application...
+2026-07-31 18:50:41,198 | main | INFO | Multi-agent research CLI demo initialized
+2026-07-31 18:50:41,198 | main | INFO | Creating database tables if they do not exist...
+2026-07-31 18:50:41,199 | main | INFO | Database tables initialized successfully
+2026-07-31 18:50:41,199 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 18:50:41,199 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 18:50:41,199 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 18:50:41,199 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 18:50:41,199 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 18:50:41,199 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 18:50:41,199 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 18:50:41,199 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 18:50:41,199 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 18:50:41,199 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 18:50:41,199 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 18:50:41,199 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 18:50:41,199 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 18:50:41,199 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 18:50:41,199 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 18:50:41,199 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 18:50:41,199 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 18:57:35,121 | main | INFO | Multi-agent research CLI demo initialized
+2026-07-31 18:57:35,121 | main | INFO | Creating database tables if they do not exist...
+2026-07-31 18:57:35,122 | main | INFO | Database tables initialized successfully
+2026-07-31 18:57:35,122 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 18:57:35,122 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 18:57:35,122 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 18:57:35,122 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 18:57:35,122 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 18:57:35,122 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 18:57:35,122 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 18:57:35,122 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 18:57:35,122 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 18:57:35,122 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 18:57:35,123 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 18:57:35,123 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 18:57:35,123 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 18:57:35,123 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 18:57:35,123 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 18:57:35,123 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 18:57:35,123 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 19:30:03,336 | main | INFO | Multi-agent research CLI demo initialized
+2026-07-31 19:30:03,336 | main | INFO | Creating database tables if they do not exist...
+2026-07-31 19:30:03,337 | main | INFO | Database tables initialized successfully
+2026-07-31 19:30:03,337 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 19:30:03,337 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 19:30:03,337 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 19:30:03,337 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 19:30:03,337 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 19:30:03,337 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 19:30:03,337 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 19:30:03,337 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 19:30:03,337 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 19:30:03,337 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 19:30:03,337 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 19:30:03,337 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 19:30:03,337 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 19:30:03,337 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 19:30:03,337 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 19:30:03,337 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 19:30:03,337 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 19:30:08,663 | main | INFO | Multi-agent research CLI demo initialized
+2026-07-31 19:30:08,663 | main | INFO | Creating database tables if they do not exist...
+2026-07-31 19:30:08,663 | main | INFO | Database tables initialized successfully
+2026-07-31 19:30:08,663 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 19:30:08,663 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 19:30:08,663 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 19:30:08,664 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 19:30:08,664 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 19:30:08,664 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 19:30:08,664 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 19:30:08,664 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 19:30:08,664 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 19:30:08,664 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 19:30:08,664 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 19:30:08,664 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 19:30:08,664 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 19:30:08,664 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 19:30:08,664 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 19:30:08,664 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 19:30:08,664 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 19:33:26,998 | main | INFO | Multi-agent research CLI demo initialized
+2026-07-31 19:33:26,999 | main | INFO | Creating database tables if they do not exist...
+2026-07-31 19:33:27,003 | main | INFO | Database tables initialized successfully
+2026-07-31 19:33:27,003 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 19:33:27,003 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 19:33:27,003 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 19:33:27,003 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 19:33:27,003 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 19:33:27,004 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 19:33:27,004 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 19:33:27,004 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 19:33:27,004 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 19:33:27,004 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 19:33:27,004 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 19:33:27,004 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 19:33:27,004 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 19:33:27,004 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 19:33:27,004 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 19:33:27,004 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 19:33:27,004 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 19:34:23,454 | main | INFO | Multi-agent research CLI demo initialized
+2026-07-31 19:34:23,454 | main | INFO | Creating database tables if they do not exist...
+2026-07-31 19:34:23,455 | main | INFO | Database tables initialized successfully
+2026-07-31 19:34:23,455 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 19:34:23,455 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 19:34:23,455 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 19:34:23,455 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 19:34:23,455 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 19:34:23,455 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 19:34:23,456 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 19:34:23,456 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 19:34:23,456 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 19:34:23,456 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 19:34:23,456 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 19:34:23,456 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 19:34:23,456 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 19:34:23,456 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 19:34:23,456 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 19:34:23,456 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 19:34:23,456 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 19:35:48,202 | api | INFO | Compiling workflow graph...
+2026-07-31 19:35:48,202 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 19:35:48,203 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 19:35:48,203 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 19:35:48,203 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 19:35:48,203 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 19:35:48,203 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 19:35:48,203 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 19:35:48,203 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 19:35:48,203 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 19:35:48,203 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 19:35:48,203 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 19:35:48,203 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 19:35:48,203 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 19:35:48,203 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 19:35:48,203 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 19:35:48,203 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 19:35:48,203 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 19:35:48,206 | api | INFO | Workflow graph compiled successfully.
+2026-07-31 19:35:49,314 | api | INFO | Compiling workflow graph...
+2026-07-31 19:35:49,314 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 19:35:49,314 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 19:35:49,314 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 19:35:49,315 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 19:35:49,315 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 19:35:49,315 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 19:35:49,315 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 19:35:49,315 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 19:35:49,315 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 19:35:49,315 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 19:35:49,315 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 19:35:49,315 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 19:35:49,315 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 19:35:49,315 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 19:35:49,315 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 19:35:49,315 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 19:35:49,315 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 19:35:49,318 | api | INFO | Workflow graph compiled successfully.
+2026-07-31 19:35:49,363 | api | INFO | Compiling workflow graph...
+2026-07-31 19:35:49,363 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 19:35:49,364 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 19:35:49,364 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 19:35:49,364 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 19:35:49,364 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 19:35:49,364 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 19:35:49,364 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 19:35:49,364 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 19:35:49,364 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 19:35:49,364 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 19:35:49,364 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 19:35:49,364 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 19:35:49,364 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 19:35:49,364 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 19:35:49,364 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 19:35:49,364 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 19:35:49,364 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 19:35:49,367 | api | INFO | Workflow graph compiled successfully.
+2026-07-31 19:35:49,370 | api | INFO | Starting up FastAPI application...
+2026-07-31 19:35:49,370 | api | INFO | Initializing database tables if not existing...
+2026-07-31 19:35:49,371 | api | INFO | Database tables and columns initialized successfully.
+2026-07-31 19:36:17,961 | main | INFO | Multi-agent research CLI demo initialized
+2026-07-31 19:36:17,961 | main | INFO | Creating database tables if they do not exist...
+2026-07-31 19:36:17,964 | main | INFO | Database tables initialized successfully
+2026-07-31 19:36:17,964 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 19:36:17,964 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 19:36:17,964 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 19:36:17,964 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 19:36:17,964 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 19:36:17,964 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 19:36:17,965 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 19:36:17,965 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 19:36:17,965 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 19:36:17,965 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 19:36:17,965 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 19:36:17,965 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 19:36:17,965 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 19:36:17,965 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 19:36:17,965 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 19:36:17,965 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 19:36:17,965 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 19:36:22,605 | main | INFO | Multi-agent research CLI demo initialized
+2026-07-31 19:36:22,605 | main | INFO | Creating database tables if they do not exist...
+2026-07-31 19:36:22,605 | main | INFO | Database tables initialized successfully
+2026-07-31 19:36:22,605 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 19:36:22,605 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 19:36:22,605 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 19:36:22,606 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 19:36:22,606 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 19:36:22,606 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 19:36:22,606 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 19:36:22,606 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 19:36:22,606 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 19:36:22,606 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 19:36:22,606 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 19:36:22,606 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 19:36:22,606 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 19:36:22,606 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 19:36:22,606 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 19:36:22,606 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 19:36:22,606 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 19:36:35,916 | api | ERROR | Failed to list documents: (sqlite3.OperationalError) no such column: uploaded_documents.summary
+[SQL: SELECT uploaded_documents.id AS uploaded_documents_id, uploaded_documents.filename AS uploaded_documents_filename, uploaded_documents.title AS uploaded_documents_title, uploaded_documents.summary AS uploaded_documents_summary, uploaded_documents.short_summary AS uploaded_documents_short_summary, uploaded_documents.detailed_summary AS uploaded_documents_detailed_summary, uploaded_documents.bullet_summary AS uploaded_documents_bullet_summary, uploaded_documents.mindmap_code AS uploaded_documents_mindmap_code, uploaded_documents.flowchart_code AS uploaded_documents_flowchart_code, uploaded_documents.chunk_count AS uploaded_documents_chunk_count, uploaded_documents.file_path AS uploaded_documents_file_path, uploaded_documents.created_at AS uploaded_documents_created_at 
+FROM uploaded_documents ORDER BY uploaded_documents.created_at DESC
+ LIMIT ? OFFSET ?]
+[parameters: (100, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-07-31 19:36:35,955 | api | ERROR | Failed to list documents: (sqlite3.OperationalError) no such column: uploaded_documents.summary
+[SQL: SELECT uploaded_documents.id AS uploaded_documents_id, uploaded_documents.filename AS uploaded_documents_filename, uploaded_documents.title AS uploaded_documents_title, uploaded_documents.summary AS uploaded_documents_summary, uploaded_documents.short_summary AS uploaded_documents_short_summary, uploaded_documents.detailed_summary AS uploaded_documents_detailed_summary, uploaded_documents.bullet_summary AS uploaded_documents_bullet_summary, uploaded_documents.mindmap_code AS uploaded_documents_mindmap_code, uploaded_documents.flowchart_code AS uploaded_documents_flowchart_code, uploaded_documents.chunk_count AS uploaded_documents_chunk_count, uploaded_documents.file_path AS uploaded_documents_file_path, uploaded_documents.created_at AS uploaded_documents_created_at 
+FROM uploaded_documents ORDER BY uploaded_documents.created_at DESC
+ LIMIT ? OFFSET ?]
+[parameters: (100, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-07-31 19:36:36,746 | api | ERROR | Failed to list documents: (sqlite3.OperationalError) no such column: uploaded_documents.summary
+[SQL: SELECT uploaded_documents.id AS uploaded_documents_id, uploaded_documents.filename AS uploaded_documents_filename, uploaded_documents.title AS uploaded_documents_title, uploaded_documents.summary AS uploaded_documents_summary, uploaded_documents.short_summary AS uploaded_documents_short_summary, uploaded_documents.detailed_summary AS uploaded_documents_detailed_summary, uploaded_documents.bullet_summary AS uploaded_documents_bullet_summary, uploaded_documents.mindmap_code AS uploaded_documents_mindmap_code, uploaded_documents.flowchart_code AS uploaded_documents_flowchart_code, uploaded_documents.chunk_count AS uploaded_documents_chunk_count, uploaded_documents.file_path AS uploaded_documents_file_path, uploaded_documents.created_at AS uploaded_documents_created_at 
+FROM uploaded_documents ORDER BY uploaded_documents.created_at DESC
+ LIMIT ? OFFSET ?]
+[parameters: (100, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-07-31 19:36:36,750 | api | ERROR | Failed to list documents: (sqlite3.OperationalError) no such column: uploaded_documents.summary
+[SQL: SELECT uploaded_documents.id AS uploaded_documents_id, uploaded_documents.filename AS uploaded_documents_filename, uploaded_documents.title AS uploaded_documents_title, uploaded_documents.summary AS uploaded_documents_summary, uploaded_documents.short_summary AS uploaded_documents_short_summary, uploaded_documents.detailed_summary AS uploaded_documents_detailed_summary, uploaded_documents.bullet_summary AS uploaded_documents_bullet_summary, uploaded_documents.mindmap_code AS uploaded_documents_mindmap_code, uploaded_documents.flowchart_code AS uploaded_documents_flowchart_code, uploaded_documents.chunk_count AS uploaded_documents_chunk_count, uploaded_documents.file_path AS uploaded_documents_file_path, uploaded_documents.created_at AS uploaded_documents_created_at 
+FROM uploaded_documents ORDER BY uploaded_documents.created_at DESC
+ LIMIT ? OFFSET ?]
+[parameters: (100, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-07-31 19:36:38,163 | api | ERROR | Failed to list documents: (sqlite3.OperationalError) no such column: uploaded_documents.summary
+[SQL: SELECT uploaded_documents.id AS uploaded_documents_id, uploaded_documents.filename AS uploaded_documents_filename, uploaded_documents.title AS uploaded_documents_title, uploaded_documents.summary AS uploaded_documents_summary, uploaded_documents.short_summary AS uploaded_documents_short_summary, uploaded_documents.detailed_summary AS uploaded_documents_detailed_summary, uploaded_documents.bullet_summary AS uploaded_documents_bullet_summary, uploaded_documents.mindmap_code AS uploaded_documents_mindmap_code, uploaded_documents.flowchart_code AS uploaded_documents_flowchart_code, uploaded_documents.chunk_count AS uploaded_documents_chunk_count, uploaded_documents.file_path AS uploaded_documents_file_path, uploaded_documents.created_at AS uploaded_documents_created_at 
+FROM uploaded_documents ORDER BY uploaded_documents.created_at DESC
+ LIMIT ? OFFSET ?]
+[parameters: (100, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-07-31 19:36:38,166 | api | ERROR | Failed to list documents: (sqlite3.OperationalError) no such column: uploaded_documents.summary
+[SQL: SELECT uploaded_documents.id AS uploaded_documents_id, uploaded_documents.filename AS uploaded_documents_filename, uploaded_documents.title AS uploaded_documents_title, uploaded_documents.summary AS uploaded_documents_summary, uploaded_documents.short_summary AS uploaded_documents_short_summary, uploaded_documents.detailed_summary AS uploaded_documents_detailed_summary, uploaded_documents.bullet_summary AS uploaded_documents_bullet_summary, uploaded_documents.mindmap_code AS uploaded_documents_mindmap_code, uploaded_documents.flowchart_code AS uploaded_documents_flowchart_code, uploaded_documents.chunk_count AS uploaded_documents_chunk_count, uploaded_documents.file_path AS uploaded_documents_file_path, uploaded_documents.created_at AS uploaded_documents_created_at 
+FROM uploaded_documents ORDER BY uploaded_documents.created_at DESC
+ LIMIT ? OFFSET ?]
+[parameters: (100, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-07-31 19:36:42,356 | api | INFO | API: POST /upload called for filename: 'AbhishekDuggal-Resume.pdf'
+2026-07-31 19:36:42,356 | api | INFO | Saved upload to /Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/uploads/AbhishekDuggal-Resume.pdf
+2026-07-31 19:36:57,106 | api | INFO | InMemoryVectorStore indexing completed for AbhishekDuggal-Resume.pdf
+2026-07-31 19:37:07,816 | api | ERROR | Document upload/indexing failed: (sqlite3.OperationalError) table uploaded_documents has no column named summary
+[SQL: INSERT INTO uploaded_documents (filename, title, summary, short_summary, detailed_summary, bullet_summary, mindmap_code, flowchart_code, chunk_count, file_path, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('AbhishekDuggal-Resume.pdf', '**Abhishek Duggal: Computer Science Engineering Portfolio and Technical Skills Overview**', 'Abhishek Duggal is a Computer Science Engineering student with a strong academic record (CGPA: 8.75/10) and extensive technical skills in software de ... (194 characters truncated) ... wcasing his ability to architect secure, user-friendly solutions while achieving notable recognition in competitive coding and technical assessments.', 'Abhishek Duggal is a Computer Science Engineering student with a strong academic record (CGPA: 8.75/10) and extensive technical skills in software de ... (194 characters truncated) ... wcasing his ability to architect secure, user-friendly solutions while achieving notable recognition in competitive coding and technical assessments.', 'Abhishek Duggal is a Bachelor of Technology student specializing in Computer Science Engineering at Chitkara University, where he has maintained an i ... (1967 characters truncated) ...  presence on platforms like GitHub and LinkedIn will be crucial for showcasing his work and connecting with potential employers in the tech industry.', '- Abhishek Duggal is pursuing a Bachelor of Technology in Computer Science Engineering at Chitkara University, with a CGPA of 8.75/10, expected to gr ... (861 characters truncated) ... g the top 8% of students.\n- Demonstrated strong problem-solving skills by solving over 900 coding problems and achieving a LeetCode rating of 1500+.', 'graph TD\n    A["Abhishek Duggal"] --> B["Contact Information"]\n    B --> C["Email: abhishekduggal04@gmail.com"]\n    B --> D["Phone: +91-7355739191 ... (1674 characters truncated) ... batch"]\n    AG --> AJ["MERN stack project ranked top 10% of 3rd-year projects"]\n    AG --> AK["Solved 900+ coding problems, LeetCode rating 1500+"]', 'graph LR\n    A["Abhishek Duggal"] --> B["Education"]\n    B --> C["Bachelor of Technology in Computer Science Engineering"]\n    C --> D["Chitkara U ... (1872 characters truncated) ...  top 8% for URA technical batch"]\n    AM --> AP["Led a top 10% ranked MERN stack project"]\n    AM --> AQ["Solved 900+ coding problems on LeetCode"]', 3, '/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/uploads/AbhishekDuggal-Resume.pdf', '2026-07-31 14:07:07.816013')]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: table uploaded_documents has no column named summary
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/api.py", line 276, in upload_document
+    saved_doc = create_document(
+                ^^^^^^^^^^^^^^^^
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/database/crud.py", line 118, in create_document
+    db.commit()
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2035, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1316, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1290, in _prepare_impl
+    self.session.flush()
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4353, in flush
+    self._flush(objects)
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4488, in _flush
+    with util.safe_reraise():
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4449, in _flush
+    flush_context.execute()
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 465, in execute
+    rec.execute(self)
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 641, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 94, in save_obj
+    _emit_insert_statements(
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 1234, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+    return meth(
+           ^^^^^
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1848, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1988, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2365, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) table uploaded_documents has no column named summary
+[SQL: INSERT INTO uploaded_documents (filename, title, summary, short_summary, detailed_summary, bullet_summary, mindmap_code, flowchart_code, chunk_count, file_path, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('AbhishekDuggal-Resume.pdf', '**Abhishek Duggal: Computer Science Engineering Portfolio and Technical Skills Overview**', 'Abhishek Duggal is a Computer Science Engineering student with a strong academic record (CGPA: 8.75/10) and extensive technical skills in software de ... (194 characters truncated) ... wcasing his ability to architect secure, user-friendly solutions while achieving notable recognition in competitive coding and technical assessments.', 'Abhishek Duggal is a Computer Science Engineering student with a strong academic record (CGPA: 8.75/10) and extensive technical skills in software de ... (194 characters truncated) ... wcasing his ability to architect secure, user-friendly solutions while achieving notable recognition in competitive coding and technical assessments.', 'Abhishek Duggal is a Bachelor of Technology student specializing in Computer Science Engineering at Chitkara University, where he has maintained an i ... (1967 characters truncated) ...  presence on platforms like GitHub and LinkedIn will be crucial for showcasing his work and connecting with potential employers in the tech industry.', '- Abhishek Duggal is pursuing a Bachelor of Technology in Computer Science Engineering at Chitkara University, with a CGPA of 8.75/10, expected to gr ... (861 characters truncated) ... g the top 8% of students.\n- Demonstrated strong problem-solving skills by solving over 900 coding problems and achieving a LeetCode rating of 1500+.', 'graph TD\n    A["Abhishek Duggal"] --> B["Contact Information"]\n    B --> C["Email: abhishekduggal04@gmail.com"]\n    B --> D["Phone: +91-7355739191 ... (1674 characters truncated) ... batch"]\n    AG --> AJ["MERN stack project ranked top 10% of 3rd-year projects"]\n    AG --> AK["Solved 900+ coding problems, LeetCode rating 1500+"]', 'graph LR\n    A["Abhishek Duggal"] --> B["Education"]\n    B --> C["Bachelor of Technology in Computer Science Engineering"]\n    C --> D["Chitkara U ... (1872 characters truncated) ...  top 8% for URA technical batch"]\n    AM --> AP["Led a top 10% ranked MERN stack project"]\n    AM --> AQ["Solved 900+ coding problems on LeetCode"]', 3, '/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/uploads/AbhishekDuggal-Resume.pdf', '2026-07-31 14:07:07.816013')]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-07-31 19:38:02,696 | api | INFO | Shutting down FastAPI application...
+2026-07-31 19:38:03,904 | api | INFO | Compiling workflow graph...
+2026-07-31 19:38:03,904 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 19:38:03,904 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 19:38:03,904 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 19:38:03,904 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 19:38:03,904 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 19:38:03,904 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 19:38:03,904 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 19:38:03,904 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 19:38:03,905 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 19:38:03,905 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 19:38:03,905 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 19:38:03,905 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 19:38:03,905 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 19:38:03,905 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 19:38:03,905 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 19:38:03,905 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 19:38:03,905 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 19:38:03,908 | api | INFO | Workflow graph compiled successfully.
+2026-07-31 19:38:03,932 | api | INFO | Compiling workflow graph...
+2026-07-31 19:38:03,932 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 19:38:03,932 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 19:38:03,932 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 19:38:03,932 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 19:38:03,933 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 19:38:03,933 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 19:38:03,933 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 19:38:03,933 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 19:38:03,933 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 19:38:03,933 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 19:38:03,933 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 19:38:03,933 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 19:38:03,933 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 19:38:03,933 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 19:38:03,933 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 19:38:03,933 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 19:38:03,933 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 19:38:03,936 | api | INFO | Workflow graph compiled successfully.
+2026-07-31 19:38:03,938 | api | INFO | Starting up FastAPI application...
+2026-07-31 19:38:03,938 | api | INFO | Initializing database tables if not existing...
+2026-07-31 19:38:03,940 | api | INFO | Database tables and columns initialized successfully.
+2026-07-31 19:38:09,817 | api | INFO | Compiling workflow graph...
+2026-07-31 19:38:09,817 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 19:38:09,817 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 19:38:09,817 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 19:38:09,817 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 19:38:09,817 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 19:38:09,817 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 19:38:09,817 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 19:38:09,817 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 19:38:09,817 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 19:38:09,817 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 19:38:09,817 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 19:38:09,817 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 19:38:09,817 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 19:38:09,817 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 19:38:09,817 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 19:38:09,817 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 19:38:09,817 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 19:38:09,820 | api | INFO | Workflow graph compiled successfully.
+2026-07-31 19:38:10,740 | api | INFO | Compiling workflow graph...
+2026-07-31 19:38:10,740 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 19:38:10,741 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 19:38:10,741 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 19:38:10,741 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 19:38:10,741 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 19:38:10,741 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 19:38:10,741 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 19:38:10,741 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 19:38:10,741 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 19:38:10,741 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 19:38:10,741 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 19:38:10,741 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 19:38:10,741 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 19:38:10,741 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 19:38:10,741 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 19:38:10,741 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 19:38:10,741 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 19:38:10,744 | api | INFO | Workflow graph compiled successfully.
+2026-07-31 19:38:10,761 | api | INFO | Compiling workflow graph...
+2026-07-31 19:38:10,761 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 19:38:10,761 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 19:38:10,761 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 19:38:10,761 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 19:38:10,761 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 19:38:10,761 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 19:38:10,761 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 19:38:10,761 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 19:38:10,761 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 19:38:10,761 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 19:38:10,761 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 19:38:10,761 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 19:38:10,761 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 19:38:10,761 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 19:38:10,761 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 19:38:10,761 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 19:38:10,761 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 19:38:10,764 | api | INFO | Workflow graph compiled successfully.
+2026-07-31 19:38:10,766 | api | INFO | Starting up FastAPI application...
+2026-07-31 19:38:10,766 | api | INFO | Initializing database tables if not existing...
+2026-07-31 19:38:10,768 | api | INFO | Database tables and columns initialized successfully.
+2026-07-31 19:38:19,152 | api | INFO | API: POST /upload called for filename: 'README.md'
+2026-07-31 19:38:19,152 | api | INFO | Saved upload to /Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/uploads/README.md
+2026-07-31 19:38:19,152 | api | WARNING | Standard load_document failed for README.md: Unsupported file type: .md. Trying fallback loader.
+2026-07-31 19:38:19,991 | api | INFO | InMemoryVectorStore indexing completed for README.md
+2026-07-31 19:38:28,855 | api | ERROR | Document upload/indexing failed: (sqlite3.IntegrityError) NOT NULL constraint failed: uploaded_documents.filepath
+[SQL: INSERT INTO uploaded_documents (filename, title, summary, short_summary, detailed_summary, bullet_summary, mindmap_code, flowchart_code, chunk_count, file_path, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('README.md', '**Title: Modular Multi-Agent Research Workflow System**', 'The Multi-Agent Research System is a modular workflow that leverages LangGraph, LangChain, and SQLAlchemy to conduct comprehensive market research th ... (99 characters truncated) ... based on quality checks. The system stores reports and metadata in a local SQLite database, allowing for easy querying and export to Markdown format.', 'The Multi-Agent Research System is a modular workflow that leverages LangGraph, LangChain, and SQLAlchemy to conduct comprehensive market research th ... (99 characters truncated) ... based on quality checks. The system stores reports and metadata in a local SQLite database, allowing for easy querying and export to Markdown format.', "The Multi-Agent Research System is a sophisticated modular research workflow designed to streamline the process of gathering and synthesizing informa ... (2091 characters truncated) ... intenance of the underlying dependencies and libraries will ensure that the system remains robust and capable of adapting to evolving research needs.", '- The Multi-Agent Research System employs a modular workflow using LangGraph, LangChain, and SQLAlchemy to conduct market research and synthesize fin ... (722 characters truncated) ... ith research workflows.\n- Users can initiate new research topics, review past research history, and manage their sessions through the CLI interface.', 'graph TD\n    "Multi-Agent Research System" --> "Modular Research Workflow"\n    "Modular Research Workflow" --> "LangGraph"\n    "Modular Research W ... (1466 characters truncated) ...  Entrypoint" --> "Start New Research Workflow"\n    "Start New Research Workflow" --> "View Research History"\n    "View Research History" --> "Exit"', 'graph LR\n    START["Start"] --> Split["Splitter Agent"]\n    \n    subgraph Parallel Research\n        Split --> R1["Market Analyst"]\n        Split ... (321 characters truncated) ... erations Maxed" --> End["End & Save to DB"]\n    Router -- "Score < Target & Iterations Left" --> Imp["Improve Report Agent"]\n    \n    Imp --> Qual', 4, '/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/uploads/README.md', '2026-07-31 14:08:28.855191')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+Traceback (most recent call last):
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.IntegrityError: NOT NULL constraint failed: uploaded_documents.filepath
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/api.py", line 289, in upload_document
+    saved_doc = create_document(
+                ^^^^^^^^^^^^^^^^
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/database/crud.py", line 118, in create_document
+    db.commit()
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2035, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1316, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1290, in _prepare_impl
+    self.session.flush()
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4353, in flush
+    self._flush(objects)
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4488, in _flush
+    with util.safe_reraise():
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 122, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4449, in _flush
+    flush_context.execute()
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 465, in execute
+    rec.execute(self)
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 641, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 94, in save_obj
+    _emit_insert_statements(
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 1234, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+    return meth(
+           ^^^^^
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1848, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1988, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2365, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+  File "/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/.venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) NOT NULL constraint failed: uploaded_documents.filepath
+[SQL: INSERT INTO uploaded_documents (filename, title, summary, short_summary, detailed_summary, bullet_summary, mindmap_code, flowchart_code, chunk_count, file_path, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('README.md', '**Title: Modular Multi-Agent Research Workflow System**', 'The Multi-Agent Research System is a modular workflow that leverages LangGraph, LangChain, and SQLAlchemy to conduct comprehensive market research th ... (99 characters truncated) ... based on quality checks. The system stores reports and metadata in a local SQLite database, allowing for easy querying and export to Markdown format.', 'The Multi-Agent Research System is a modular workflow that leverages LangGraph, LangChain, and SQLAlchemy to conduct comprehensive market research th ... (99 characters truncated) ... based on quality checks. The system stores reports and metadata in a local SQLite database, allowing for easy querying and export to Markdown format.', "The Multi-Agent Research System is a sophisticated modular research workflow designed to streamline the process of gathering and synthesizing informa ... (2091 characters truncated) ... intenance of the underlying dependencies and libraries will ensure that the system remains robust and capable of adapting to evolving research needs.", '- The Multi-Agent Research System employs a modular workflow using LangGraph, LangChain, and SQLAlchemy to conduct market research and synthesize fin ... (722 characters truncated) ... ith research workflows.\n- Users can initiate new research topics, review past research history, and manage their sessions through the CLI interface.', 'graph TD\n    "Multi-Agent Research System" --> "Modular Research Workflow"\n    "Modular Research Workflow" --> "LangGraph"\n    "Modular Research W ... (1466 characters truncated) ...  Entrypoint" --> "Start New Research Workflow"\n    "Start New Research Workflow" --> "View Research History"\n    "View Research History" --> "Exit"', 'graph LR\n    START["Start"] --> Split["Splitter Agent"]\n    \n    subgraph Parallel Research\n        Split --> R1["Market Analyst"]\n        Split ... (321 characters truncated) ... erations Maxed" --> End["End & Save to DB"]\n    Router -- "Score < Target & Iterations Left" --> Imp["Improve Report Agent"]\n    \n    Imp --> Qual', 4, '/Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/uploads/README.md', '2026-07-31 14:08:28.855191')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2026-07-31 19:38:44,932 | api | INFO | Shutting down FastAPI application...
+2026-07-31 19:38:46,119 | api | INFO | Compiling workflow graph...
+2026-07-31 19:38:46,119 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 19:38:46,119 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 19:38:46,119 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 19:38:46,119 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 19:38:46,119 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 19:38:46,119 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 19:38:46,119 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 19:38:46,119 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 19:38:46,119 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 19:38:46,120 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 19:38:46,120 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 19:38:46,120 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 19:38:46,120 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 19:38:46,120 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 19:38:46,120 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 19:38:46,120 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 19:38:46,120 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 19:38:46,124 | api | INFO | Workflow graph compiled successfully.
+2026-07-31 19:38:46,148 | api | INFO | Compiling workflow graph...
+2026-07-31 19:38:46,148 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 19:38:46,148 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 19:38:46,148 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 19:38:46,148 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 19:38:46,148 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 19:38:46,149 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 19:38:46,149 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 19:38:46,149 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 19:38:46,149 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 19:38:46,149 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 19:38:46,149 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 19:38:46,149 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 19:38:46,149 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 19:38:46,149 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 19:38:46,149 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 19:38:46,149 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 19:38:46,149 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 19:38:46,152 | api | INFO | Workflow graph compiled successfully.
+2026-07-31 19:38:46,154 | api | INFO | Starting up FastAPI application...
+2026-07-31 19:38:46,154 | api | INFO | Initializing database tables if not existing...
+2026-07-31 19:38:46,155 | api | INFO | Database tables and columns initialized successfully.
+2026-07-31 19:38:51,157 | api | INFO | API: POST /upload called for filename: 'pyproject.toml'
+2026-07-31 19:38:51,158 | api | INFO | Saved upload to /Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/uploads/pyproject.toml
+2026-07-31 19:38:51,158 | api | WARNING | Standard load_document failed for pyproject.toml: Unsupported file type: .toml. Trying fallback loader.
+2026-07-31 19:38:51,764 | api | INFO | InMemoryVectorStore indexing completed for pyproject.toml
+2026-07-31 19:39:13,670 | main | INFO | Multi-agent research CLI demo initialized
+2026-07-31 19:39:13,670 | main | INFO | Creating database tables if they do not exist...
+2026-07-31 19:39:13,670 | main | INFO | Database tables initialized successfully
+2026-07-31 19:39:13,670 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 19:39:13,671 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 19:39:13,671 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 19:39:13,671 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 19:39:13,671 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 19:39:13,671 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 19:39:13,671 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 19:39:13,671 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 19:39:13,671 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 19:39:13,671 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 19:39:13,671 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 19:39:13,671 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 19:39:13,671 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 19:39:13,671 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 19:39:13,671 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 19:39:13,671 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 19:39:13,671 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 19:39:23,486 | api | INFO | API: POST /upload called for filename: 'AbhishekDuggal-Resume.pdf'
+2026-07-31 19:39:23,486 | api | INFO | Saved upload to /Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/uploads/AbhishekDuggal-Resume.pdf
+2026-07-31 19:39:25,168 | api | INFO | InMemoryVectorStore indexing completed for AbhishekDuggal-Resume.pdf
+2026-07-31 19:39:42,422 | api | INFO | API: POST /upload called for filename: 'AbhishekDuggal-Resume.pdf'
+2026-07-31 19:39:42,423 | api | INFO | Saved upload to /Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/uploads/AbhishekDuggal-Resume.pdf
+2026-07-31 19:39:43,293 | api | INFO | InMemoryVectorStore indexing completed for AbhishekDuggal-Resume.pdf
+2026-07-31 19:41:55,857 | api | INFO | Shutting down FastAPI application...
+2026-07-31 19:41:57,095 | api | INFO | Compiling workflow graph...
+2026-07-31 19:41:57,095 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 19:41:57,095 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 19:41:57,095 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 19:41:57,095 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 19:41:57,095 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 19:41:57,095 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 19:41:57,095 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 19:41:57,095 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 19:41:57,096 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 19:41:57,096 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 19:41:57,096 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 19:41:57,096 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 19:41:57,096 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 19:41:57,096 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 19:41:57,096 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 19:41:57,096 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 19:41:57,096 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 19:41:57,100 | api | INFO | Workflow graph compiled successfully.
+2026-07-31 19:41:57,125 | api | INFO | Compiling workflow graph...
+2026-07-31 19:41:57,125 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 19:41:57,125 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 19:41:57,125 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 19:41:57,125 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 19:41:57,125 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 19:41:57,125 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 19:41:57,125 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 19:41:57,125 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 19:41:57,125 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 19:41:57,125 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 19:41:57,125 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 19:41:57,125 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 19:41:57,125 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 19:41:57,125 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 19:41:57,125 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 19:41:57,125 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 19:41:57,125 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 19:41:57,128 | api | INFO | Workflow graph compiled successfully.
+2026-07-31 19:41:57,131 | api | INFO | Starting up FastAPI application...
+2026-07-31 19:41:57,131 | api | INFO | Initializing database tables if not existing...
+2026-07-31 19:41:57,132 | api | INFO | Database tables and columns initialized successfully.
+2026-07-31 19:43:24,592 | main | INFO | Multi-agent research CLI demo initialized
+2026-07-31 19:43:24,592 | main | INFO | Creating database tables if they do not exist...
+2026-07-31 19:43:24,593 | main | INFO | Database tables initialized successfully
+2026-07-31 19:43:24,593 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 19:43:24,593 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 19:43:24,593 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 19:43:24,593 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 19:43:24,593 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 19:43:24,593 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 19:43:24,593 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 19:43:24,593 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 19:43:24,593 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 19:43:24,593 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 19:43:24,593 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 19:43:24,593 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 19:43:24,593 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 19:43:24,593 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 19:43:24,593 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 19:43:24,593 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 19:43:24,593 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 19:43:33,372 | api | INFO | API: POST /upload called for filename: 'AbhishekDuggal-Resume.pdf'
+2026-07-31 19:43:33,372 | api | INFO | Saved upload to /Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/uploads/AbhishekDuggal-Resume.pdf
+2026-07-31 19:43:35,028 | api | INFO | InMemoryVectorStore indexing completed for AbhishekDuggal-Resume.pdf
+2026-07-31 19:44:49,940 | api | INFO | Shutting down FastAPI application...
+2026-07-31 19:44:50,928 | api | INFO | Compiling workflow graph...
+2026-07-31 19:44:50,928 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 19:44:50,928 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 19:44:50,928 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 19:44:50,928 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 19:44:50,928 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 19:44:50,928 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 19:44:50,928 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 19:44:50,928 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 19:44:50,928 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 19:44:50,928 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 19:44:50,928 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 19:44:50,928 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 19:44:50,928 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 19:44:50,928 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 19:44:50,928 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 19:44:50,929 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 19:44:50,929 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 19:44:50,932 | api | INFO | Workflow graph compiled successfully.
+2026-07-31 19:44:50,955 | api | INFO | Compiling workflow graph...
+2026-07-31 19:44:50,955 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 19:44:50,956 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 19:44:50,956 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 19:44:50,956 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 19:44:50,956 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 19:44:50,956 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 19:44:50,956 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 19:44:50,956 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 19:44:50,956 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 19:44:50,956 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 19:44:50,956 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 19:44:50,956 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 19:44:50,956 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 19:44:50,956 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 19:44:50,956 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 19:44:50,956 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 19:44:50,956 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 19:44:50,959 | api | INFO | Workflow graph compiled successfully.
+2026-07-31 19:44:50,961 | api | INFO | Starting up FastAPI application...
+2026-07-31 19:44:50,961 | api | INFO | Initializing database tables if not existing...
+2026-07-31 19:44:50,962 | api | INFO | Database tables and columns initialized successfully.
+2026-07-31 19:46:00,382 | main | INFO | Multi-agent research CLI demo initialized
+2026-07-31 19:46:00,382 | main | INFO | Creating database tables if they do not exist...
+2026-07-31 19:46:00,383 | main | INFO | Database tables initialized successfully
+2026-07-31 19:46:00,383 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 19:46:00,383 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 19:46:00,383 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 19:46:00,383 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 19:46:00,383 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 19:46:00,383 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 19:46:00,383 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 19:46:00,383 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 19:46:00,383 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 19:46:00,383 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 19:46:00,383 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 19:46:00,383 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 19:46:00,383 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 19:46:00,383 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 19:46:00,383 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 19:46:00,383 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 19:46:00,383 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 19:46:19,223 | api | INFO | API: POST /upload called for filename: 'AbhishekDuggal-Resume.pdf'
+2026-07-31 19:46:19,224 | api | INFO | Saved upload to /Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/uploads/AbhishekDuggal-Resume.pdf
+2026-07-31 19:46:20,334 | api | INFO | InMemoryVectorStore indexing completed for AbhishekDuggal-Resume.pdf

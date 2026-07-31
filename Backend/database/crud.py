@@ -82,3 +82,58 @@ def search_research_reports(db: Session, search_term: str, skip: int = 0, limit:
         (ResearchReport.report.ilike(like_term))
     ).order_by(ResearchReport.created_at.desc()).offset(skip).limit(limit).all()
 
+
+# =====================================================
+# Document CRUD Operations
+# =====================================================
+from database.models import DocumentModel
+
+def create_document(
+    db: Session,
+    filename: str,
+    title: str,
+    summary: str,
+    chunk_count: int,
+    file_path: str,
+    short_summary: str = "",
+    detailed_summary: str = "",
+    bullet_summary: str = "",
+    mindmap_code: str = "",
+    flowchart_code: str = ""
+) -> DocumentModel:
+    """Inserts an uploaded document metadata into the SQLite database."""
+    db_doc = DocumentModel(
+        filename=filename,
+        title=title,
+        summary=summary,
+        short_summary=short_summary or summary,
+        detailed_summary=detailed_summary or summary,
+        bullet_summary=bullet_summary,
+        mindmap_code=mindmap_code,
+        flowchart_code=flowchart_code,
+        chunk_count=chunk_count,
+        file_path=file_path
+    )
+    db.add(db_doc)
+    db.commit()
+    db.refresh(db_doc)
+    return db_doc
+
+def get_all_documents(db: Session, skip: int = 0, limit: int = 100) -> list[DocumentModel]:
+    """Retrieves all stored uploaded documents ordered by creation date."""
+    return db.query(DocumentModel).order_by(DocumentModel.created_at.desc()).offset(skip).limit(limit).all()
+
+def get_document(db: Session, doc_id: int) -> DocumentModel | None:
+    """Retrieves a single uploaded document by ID."""
+    return db.query(DocumentModel).filter(DocumentModel.id == doc_id).first()
+
+def delete_document(db: Session, doc_id: int) -> bool:
+    """Deletes a document entry from the database."""
+    db_doc = db.query(DocumentModel).filter(DocumentModel.id == doc_id).first()
+    if db_doc:
+        db.delete(db_doc)
+        db.commit()
+        return True
+    return False
+
+

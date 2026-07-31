@@ -25,3 +25,23 @@ class ResearchReport(Base):
         DateTime,
         default=lambda: datetime.now(timezone.utc)
     )
+
+
+class DocumentModel(Base):
+    __tablename__ = "uploaded_documents"
+
+    id = Column(Integer, primary_key=True, index=True)
+    filename = Column(Text, nullable=False)
+    title = Column(Text, nullable=False)
+    summary = Column(Text, nullable=True)
+    short_summary = Column(Text, nullable=True)
+    detailed_summary = Column(Text, nullable=True)
+    bullet_summary = Column(Text, nullable=True)
+    mindmap_code = Column(Text, nullable=True)
+    flowchart_code = Column(Text, nullable=True)
+    chunk_count = Column(Integer, default=0)
+    file_path = Column(Text, nullable=False)
+    created_at = Column(
+        DateTime,
+        default=lambda: datetime.now(timezone.utc)
+    )
