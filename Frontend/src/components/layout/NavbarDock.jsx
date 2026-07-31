@@ -7,8 +7,6 @@ import {
   Activity, 
   Upload, 
   Search, 
-  ToggleLeft, 
-  ToggleRight,
   Home
 } from 'lucide-react';
 import { Badge } from '../ui/Badge';
@@ -20,8 +18,6 @@ export function NavbarDock({
   reportsCount = 0,
   searchTerm,
   setSearchTerm,
-  isDemoMode,
-  setIsDemoMode,
   onUploadClick,
   onNewResearch
 }) {
@@ -163,28 +159,6 @@ export function NavbarDock({
 
       {/* Right Action Controls */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-        {/* Offline / Live API Switcher */}
-        <button
-          onClick={() => setIsDemoMode(!isDemoMode)}
-          style={{
-            background: isDemoMode ? 'rgba(139, 92, 246, 0.15)' : 'rgba(16, 185, 129, 0.15)',
-            border: `1px solid ${isDemoMode ? 'rgba(139, 92, 246, 0.4)' : 'rgba(16, 185, 129, 0.4)'}`,
-            color: isDemoMode ? '#c084fc' : '#34d399',
-            padding: '0.4rem 0.8rem',
-            borderRadius: '9999px',
-            fontSize: '0.78rem',
-            fontWeight: 600,
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.4rem'
-          }}
-          title={isDemoMode ? "Currently running in Standalone Demo Mode" : "Currently connected to FastAPI backend"}
-        >
-          {isDemoMode ? <ToggleLeft size={16} /> : <ToggleRight size={16} />}
-          <span>{isDemoMode ? 'Demo Mode' : 'Live API'}</span>
-        </button>
-
         {/* Search Input */}
         <div style={{ 
           display: 'flex', 

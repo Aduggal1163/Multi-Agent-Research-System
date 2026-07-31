@@ -70,8 +70,6 @@ export default function App() {
         reportsCount={history.length}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
-        isDemoMode={isDemoMode}
-        setIsDemoMode={setIsDemoMode}
         onUploadClick={() => setActiveTab('knowledge')}
         onNewResearch={handleNewResearchClick}
       />
