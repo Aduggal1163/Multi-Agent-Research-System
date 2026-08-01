@@ -74,12 +74,18 @@ async def lifespan(app: FastAPI):
                 ("flowchart_code", "TEXT"),
                 ("chunk_count", "INTEGER"),
                 ("file_path", "TEXT"),
+                ("user_id", "INTEGER"),
             ]:
                 try:
                     conn.execute(text(f"ALTER TABLE uploaded_documents ADD COLUMN {col} {col_type}"))
                     conn.commit()
                 except Exception:
                     pass
+            try:
+                conn.execute(text("ALTER TABLE research_reports ADD COLUMN user_id INTEGER"))
+                conn.commit()
+            except Exception:
+                pass
         logger.info("Database tables and columns initialized successfully.")
     except Exception as e:
         logger.critical("Database initialization failed: %s", str(e), exc_info=True)
@@ -110,6 +116,41 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from auth_utils import hash_password, verify_password, create_jwt_token, get_current_user
+from database.crud import create_user, get_user_by_email
+from schemas import UserRegisterRequest, UserLoginRequest, UserResponse, AuthTokenResponse
+
+# =====================================================
+# Authentication Endpoints
+# =====================================================
+@app.post("/auth/register", response_model=AuthTokenResponse)
+def register_user_endpoint(payload: UserRegisterRequest, db: Session = Depends(get_db)):
+    existing = get_user_by_email(db, email=payload.email)
+    if existing:
+        raise HTTPException(status_code=400, detail="User with this email already exists")
+    
+    hashed = hash_password(payload.password)
+    user = create_user(db, email=payload.email, hashed_password=hashed, full_name=payload.full_name)
+    token = create_jwt_token({"sub": str(user.id), "email": user.email})
+    return AuthTokenResponse(access_token=token, user=UserResponse.from_orm(user))
+
+
+@app.post("/auth/login", response_model=AuthTokenResponse)
+def login_user_endpoint(payload: UserLoginRequest, db: Session = Depends(get_db)):
+    user = get_user_by_email(db, email=payload.email)
+    if not user or not verify_password(payload.password, user.hashed_password):
+        raise HTTPException(status_code=401, detail="Invalid email or password")
+    
+    token = create_jwt_token({"sub": str(user.id), "email": user.email})
+    return AuthTokenResponse(access_token=token, user=UserResponse.from_orm(user))
+
+
+@app.get("/auth/me", response_model=UserResponse)
+def get_me_endpoint(current_user=Depends(get_current_user)):
+    if not current_user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    return UserResponse.from_orm(current_user)
+
 logger.info("Compiling workflow graph...")
 workflow = create_multi_agent_research()
 logger.info("Workflow graph compiled successfully.")
@@ -121,9 +162,13 @@ logger.info("Workflow graph compiled successfully.")
 @app.post("/research", response_model=ResearchResponse)
 def generate_research(
     request: ResearchRequest,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user)
 ):
-    logger.info("API: POST /research called with query: '%s'", request.query)
+    if not current_user:
+        raise HTTPException(status_code=401, detail="Authentication required. Please sign in to access the Research Swarm.")
+        
+    logger.info("API: POST /research called by user ID %s for query: '%s'", current_user.id, request.query)
     
     if not request.query.strip():
         logger.warning("API: Empty research query provided")
@@ -148,6 +193,7 @@ def generate_research(
                     result.get("score"), result.get("iterations"))
         
         logger.info("API: Writing results to database...")
+        user_id = current_user.id if current_user else None
         saved_report = create_research_report(
             db=db,
             query=result["user_query"],
@@ -155,7 +201,8 @@ def generate_research(
             report=result["report"],
             review=result["review"],
             score=result["score"],
-            iterations=result["iterations"]
+            iterations=result["iterations"],
+            user_id=user_id
         )
         logger.info("API: Research report successfully saved with ID: %s", saved_report.id)
 
@@ -190,9 +237,13 @@ IN_MEMORY_RAG_STORES = {}
 @app.post("/upload", response_model=DocumentResponse)
 async def upload_document(
     file: UploadFile = File(...),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user)
 ):
-    logger.info("API: POST /upload called for filename: '%s'", file.filename)
+    if not current_user:
+        raise HTTPException(status_code=401, detail="Authentication required. Please sign in to upload documents.")
+
+    logger.info("API: POST /upload called by user ID %s for filename: '%s'", current_user.id, file.filename)
     file_path = os.path.join(UPLOAD_DIR, file.filename)
     
     try:
@@ -281,16 +332,16 @@ async def upload_document(
                 flowchart_code=flowchart_prompt | llm | StrOutputParser(),
             )
             
-            extracted = chain.invoke({"text": text_sample})
-            if extracted.get("title"): doc_title = extracted["title"].strip()
-            if extracted.get("short_summary"): doc_short = extracted["short_summary"].strip()
-            if extracted.get("detailed_summary"): doc_detailed = extracted["detailed_summary"].strip()
-            if extracted.get("bullet_summary"): doc_bullet = extracted["bullet_summary"].strip()
-            if extracted.get("mindmap_code"): doc_mindmap = extracted["mindmap_code"].replace("```mermaid", "").replace("```", "").strip()
-            if extracted.get("flowchart_code"): doc_flowchart = extracted["flowchart_code"].replace("```mermaid", "").replace("```", "").strip()
-        except Exception as llm_err:
-            logger.warning("LLM analysis extraction warning for %s: %s", file.filename, str(llm_err))
-
+            ai_results = chain.invoke({"text": text_sample})
+            doc_title = ai_results.get("title", file.filename).strip('"\'')
+            doc_short = ai_results.get("short_summary", doc_short)
+            doc_detailed = ai_results.get("detailed_summary", doc_detailed)
+            doc_bullet = ai_results.get("bullet_summary", doc_bullet)
+            doc_mindmap = ai_results.get("mindmap_code", doc_mindmap)
+            doc_flowchart = ai_results.get("flowchart_code", doc_flowchart)
+        except Exception as ai_err:
+            logger.warning("AI Summary generation failed for %s: %s. Using default metadata.", file.filename, str(ai_err))
+        user_id = current_user.id if current_user else None
         saved_doc = create_document(
             db=db,
             filename=file.filename,
@@ -302,30 +353,18 @@ async def upload_document(
             mindmap_code=doc_mindmap,
             flowchart_code=doc_flowchart,
             chunk_count=chunk_count,
-            file_path=file_path
+            file_path=file_path,
+            user_id=user_id
         )
 
-        if saved_doc and in_mem_store:
+        if in_mem_store:
             IN_MEMORY_RAG_STORES[saved_doc.id] = in_mem_store
 
+        logger.info("API: Document upload complete. Saved ID: %s", saved_doc.id)
         return saved_doc
     except Exception as e:
-        logger.error("Document upload/indexing failed: %s", str(e), exc_info=True)
-        # Final fallback document object if database write also fails
-        return DocumentResponse(
-            id=999,
-            filename=file.filename,
-            title=file.filename,
-            summary=f"Uploaded {file.filename}",
-            short_summary=f"Uploaded {file.filename}",
-            detailed_summary="Document uploaded successfully.",
-            bullet_summary=f"- Source: {file.filename}",
-            mindmap_code=f"graph TD\n  Root[\"{file.filename}\"]",
-            flowchart_code=f"graph LR\n  Start[\"{file.filename}\"]",
-            chunk_count=1,
-            file_path=file_path,
-            created_at=datetime.now(timezone.utc)
-        )
+        logger.error("API: Document upload failed for %s: %s", file.filename, str(e), exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Document upload failed: {str(e)}")
 
 
 @app.get("/documents", response_model=list[DocumentResponse])
@@ -495,10 +534,12 @@ def document_chat(
 def get_reports(
     skip: int = 0,
     limit: int = 100,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user)
 ):
     try:
-        return get_all_research_reports(db=db, skip=skip, limit=limit)
+        user_id = current_user.id if current_user else None
+        return get_all_research_reports(db=db, skip=skip, limit=limit, user_id=user_id)
     except Exception as e:
         logger.error("API: Failed to fetch research reports: %s", str(e), exc_info=True)
         raise HTTPException(status_code=500, detail="Failed to fetch reports")

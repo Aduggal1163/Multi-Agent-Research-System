@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Bot, 
   Sparkles, 
@@ -7,8 +7,13 @@ import {
   Activity, 
   Upload, 
   Search, 
-  Home
+  Home,
+  User,
+  LogOut,
+  ChevronDown,
+  ShieldCheck
 } from 'lucide-react';
+import { useAuth } from '../../context/AuthContext';
 import { Badge } from '../ui/Badge';
 
 export function NavbarDock({ 
@@ -21,6 +26,32 @@ export function NavbarDock({
   onUploadClick,
   onNewResearch
 }) {
+  const { user, isAuthenticated, openLoginModal, logout } = useAuth();
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+
+  const getUserInitials = (name = '') => {
+    if (!name) return 'U';
+    const parts = name.trim().split(' ');
+    if (parts.length >= 2) return `${parts[0][0]}${parts[1][0]}`.toUpperCase();
+    return parts[0].substring(0, 2).toUpperCase();
+  };
+
+  const handleProtectedTabClick = (targetTab) => {
+    if (!isAuthenticated && targetTab !== 'landing') {
+      openLoginModal();
+      return;
+    }
+    setActiveTab(targetTab);
+  };
+
+  const handleProtectedUploadClick = () => {
+    if (!isAuthenticated) {
+      openLoginModal();
+      return;
+    }
+    onUploadClick();
+  };
+
   return (
     <header style={{
       height: '75px',
@@ -98,7 +129,7 @@ export function NavbarDock({
 
         <button 
           className={`nav-item ${activeTab === 'workspace' ? 'active' : ''}`}
-          onClick={() => setActiveTab('workspace')}
+          onClick={() => handleProtectedTabClick('workspace')}
           style={{ width: 'auto', borderRadius: '9999px', padding: '0.45rem 1rem', fontSize: '0.85rem' }}
         >
           <Sparkles size={15} style={{ color: '#c084fc' }} />
@@ -107,7 +138,7 @@ export function NavbarDock({
 
         <button 
           className={`nav-item ${activeTab === 'knowledge' ? 'active' : ''}`}
-          onClick={() => setActiveTab('knowledge')}
+          onClick={() => handleProtectedTabClick('knowledge')}
           style={{ width: 'auto', borderRadius: '9999px', padding: '0.45rem 1rem', fontSize: '0.85rem' }}
         >
           <Database size={15} style={{ color: '#38bdf8' }} />
@@ -128,7 +159,7 @@ export function NavbarDock({
 
         <button 
           className={`nav-item ${activeTab === 'history' ? 'active' : ''}`}
-          onClick={() => setActiveTab('history')}
+          onClick={() => handleProtectedTabClick('history')}
           style={{ width: 'auto', borderRadius: '9999px', padding: '0.45rem 1rem', fontSize: '0.85rem' }}
         >
           <FolderKanban size={15} style={{ color: '#f472b6' }} />
@@ -149,7 +180,7 @@ export function NavbarDock({
 
         <button 
           className={`nav-item ${activeTab === 'analytics' ? 'active' : ''}`}
-          onClick={() => setActiveTab('analytics')}
+          onClick={() => handleProtectedTabClick('analytics')}
           style={{ width: 'auto', borderRadius: '9999px', padding: '0.45rem 1rem', fontSize: '0.85rem' }}
         >
           <Activity size={15} style={{ color: '#34d399' }} />
@@ -168,7 +199,7 @@ export function NavbarDock({
           border: '1px solid var(--border-glass)',
           borderRadius: '9999px',
           padding: '0.4rem 0.85rem',
-          width: '180px'
+          width: '170px'
         }}>
           <Search size={14} style={{ color: 'var(--text-muted)' }} />
           <input 
@@ -190,12 +221,91 @@ export function NavbarDock({
         {/* Upload Button */}
         <button 
           className="btn-primary" 
-          onClick={onUploadClick}
+          onClick={handleProtectedUploadClick}
           style={{ padding: '0.45rem 0.95rem', borderRadius: '9999px', fontSize: '0.82rem' }}
         >
           <Upload size={14} />
           <span>Upload</span>
         </button>
+
+        {/* Auth User Profile or Sign In Button */}
+        {isAuthenticated ? (
+          <div style={{ position: 'relative' }}>
+            <button
+              onClick={() => setShowProfileMenu(!showProfileMenu)}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                background: 'rgba(255, 255, 255, 0.05)',
+                border: '1px solid var(--border-glass-glow)',
+                borderRadius: '9999px',
+                padding: '0.3rem 0.65rem 0.3rem 0.35rem',
+                cursor: 'pointer',
+                color: 'var(--text-main)',
+                fontSize: '0.82rem',
+                fontWeight: 600
+              }}
+            >
+              <div style={{
+                width: '28px',
+                height: '28px',
+                borderRadius: '50%',
+                background: 'var(--gradient-brand)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#ffffff',
+                fontWeight: 700,
+                fontSize: '0.75rem'
+              }}>
+                {getUserInitials(user.full_name)}
+              </div>
+              <span>{user.full_name.split(' ')[0]}</span>
+              <ChevronDown size={14} style={{ color: 'var(--text-dim)' }} />
+            </button>
+
+            {/* Profile Dropdown Menu */}
+            {showProfileMenu && (
+              <div className="glass-panel animate-fade-in" style={{
+                position: 'absolute',
+                top: '120%',
+                right: 0,
+                width: '220px',
+                padding: '0.75rem',
+                borderRadius: '14px',
+                boxShadow: 'var(--shadow-glow)',
+                zIndex: 2000
+              }}>
+                <div style={{ padding: '0.5rem 0.75rem', borderBottom: '1px solid var(--border-glass)', marginBottom: '0.5rem' }}>
+                  <div style={{ fontWeight: 700, color: 'var(--text-main)', fontSize: '0.9rem' }}>{user.full_name}</div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>{user.email}</div>
+                  <div style={{ marginTop: '0.35rem' }}>
+                    <Badge variant="purple">{user.role || 'Enterprise Analyst'}</Badge>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => { logout(); setShowProfileMenu(false); }}
+                  className="nav-item"
+                  style={{ padding: '0.5rem 0.75rem', color: '#f87171', borderRadius: '8px', fontSize: '0.85rem' }}
+                >
+                  <LogOut size={15} />
+                  <span>Sign Out</span>
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <button
+            onClick={openLoginModal}
+            className="btn-secondary"
+            style={{ borderRadius: '9999px', padding: '0.45rem 0.95rem', fontSize: '0.82rem' }}
+          >
+            <User size={14} style={{ color: '#c084fc' }} />
+            <span>Sign In</span>
+          </button>
+        )}
       </div>
     </header>
   );

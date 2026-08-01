@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import { AuthModal } from './components/auth/AuthModal';
 import { NavbarDock } from './components/layout/NavbarDock';
 import { Toast } from './components/layout/Toast';
 import { LandingPage } from './components/landing/LandingPage';
@@ -17,10 +19,11 @@ import { useToast } from './hooks/useToast';
 import { useResearch } from './hooks/useResearch';
 import { useKnowledgeBase } from './hooks/useKnowledgeBase';
 
-export default function App() {
+function MainAppContent() {
   const [activeTab, setActiveTab] = useState('landing');
   const [searchTerm, setSearchTerm] = useState('');
   const [isDemoMode, setIsDemoMode] = useState(false);
+  const { isAuthenticated, openLoginModal } = useAuth();
 
   // Modal States
   const [exportingReport, setExportingReport] = useState(null);
@@ -50,6 +53,14 @@ export default function App() {
     removeDocument
   } = useKnowledgeBase(showToast, isDemoMode);
 
+  const handleProtectedAction = (action) => {
+    if (!isAuthenticated) {
+      openLoginModal();
+      return;
+    }
+    action();
+  };
+
   const handleStartResearch = (topicQuery) => {
     setActiveTab('workspace');
     startResearch(topicQuery);
@@ -70,8 +81,8 @@ export default function App() {
         reportsCount={history.length}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
-        onUploadClick={() => setActiveTab('knowledge')}
-        onNewResearch={handleNewResearchClick}
+        onUploadClick={() => handleProtectedAction(() => setActiveTab('knowledge'))}
+        onNewResearch={() => handleProtectedAction(handleNewResearchClick)}
       />
 
       {/* Main Page Viewport */}
@@ -79,22 +90,24 @@ export default function App() {
         <div className="app-content">
           {activeTab === 'landing' && (
             <LandingPage 
-              onLaunchWorkspace={() => setActiveTab('workspace')}
-              onLaunchKnowledge={() => setActiveTab('knowledge')}
-              onStartSampleTopic={(topic) => handleStartResearch(topic)}
+              onLaunchWorkspace={() => handleProtectedAction(() => setActiveTab('workspace'))}
+              onLaunchKnowledge={() => handleProtectedAction(() => setActiveTab('knowledge'))}
+              onStartSampleTopic={(topic) => handleProtectedAction(() => handleStartResearch(topic))}
+              reports={history}
+              documents={documents}
             />
           )}
 
           {activeTab === 'workspace' && (
             <div>
               <ResearchInput 
-                onStartResearch={startResearch}
+                onStartResearch={(query) => handleProtectedAction(() => startResearch(query))}
                 isGenerating={isGenerating}
               />
 
               {!isGenerating && !activeReport && (
                 <TemplateGallery 
-                  onSelectTemplate={(tmplTitle) => startResearch(tmplTitle)} 
+                  onSelectTemplate={(tmplTitle) => handleProtectedAction(() => startResearch(tmplTitle))} 
                 />
               )}
 
@@ -180,6 +193,8 @@ export default function App() {
       </main>
 
       {/* Modals & Dialogs */}
+      <AuthModal showToast={showToast} />
+
       {exportingReport && (
         <ExportModal 
           report={exportingReport}
@@ -209,5 +224,13 @@ export default function App() {
       {/* Floating Toast Notification */}
       <Toast toast={toast} />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <MainAppContent />
+    </AuthProvider>
   );
 }

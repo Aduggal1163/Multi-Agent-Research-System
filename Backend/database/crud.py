@@ -1,6 +1,40 @@
 from sqlalchemy.orm import Session
-from database.models import ResearchReport
+from database.models import ResearchReport, DocumentModel, User
 
+# =====================================================
+# User CRUD Operations
+# =====================================================
+def create_user(
+    db: Session,
+    email: str,
+    hashed_password: str,
+    full_name: str,
+    role: str = "Enterprise Analyst"
+) -> User:
+    """Creates a new user entry in the SQLite database."""
+    db_user = User(
+        email=email.lower().strip(),
+        hashed_password=hashed_password,
+        full_name=full_name.strip(),
+        role=role
+    )
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    return db_user
+
+def get_user_by_email(db: Session, email: str) -> User | None:
+    """Retrieves a user by unique email address."""
+    return db.query(User).filter(User.email == email.lower().strip()).first()
+
+def get_user_by_id(db: Session, user_id: int) -> User | None:
+    """Retrieves a user by unique primary key ID."""
+    return db.query(User).filter(User.id == user_id).first()
+
+
+# =====================================================
+# Research Report CRUD Operations
+# =====================================================
 def create_research_report(
     db: Session,
     query: str,
@@ -8,7 +42,8 @@ def create_research_report(
     report: str,
     review: str = None,
     score: float = None,
-    iterations: int = 0
+    iterations: int = 0,
+    user_id: int = None
 ) -> ResearchReport:
     """Inserts a completed research workflow output into the SQLite database."""
     db_report = ResearchReport(
@@ -17,7 +52,8 @@ def create_research_report(
         report=report,
         review=review,
         score=score,
-        iterations=iterations
+        iterations=iterations,
+        user_id=user_id
     )
     db.add(db_report)
     db.commit()
@@ -28,9 +64,12 @@ def get_research_report(db: Session, report_id: int) -> ResearchReport | None:
     """Retrieves a single research report by its unique ID."""
     return db.query(ResearchReport).filter(ResearchReport.id == report_id).first()
 
-def get_all_research_reports(db: Session, skip: int = 0, limit: int = 100) -> list[ResearchReport]:
+def get_all_research_reports(db: Session, skip: int = 0, limit: int = 100, user_id: int = None) -> list[ResearchReport]:
     """Retrieves all stored research reports ordered by creation date (newest first)."""
-    return db.query(ResearchReport).order_by(ResearchReport.created_at.desc()).offset(skip).limit(limit).all()
+    query = db.query(ResearchReport)
+    if user_id is not None:
+        query = query.filter(ResearchReport.user_id == user_id)
+    return query.order_by(ResearchReport.created_at.desc()).offset(skip).limit(limit).all()
 
 def delete_research_report(db: Session, report_id: int) -> bool:
     """Deletes a research report entry from the database. Returns True if found and deleted."""
@@ -86,8 +125,6 @@ def search_research_reports(db: Session, search_term: str, skip: int = 0, limit:
 # =====================================================
 # Document CRUD Operations
 # =====================================================
-from database.models import DocumentModel
-
 def create_document(
     db: Session,
     filename: str,
@@ -99,7 +136,8 @@ def create_document(
     detailed_summary: str = "",
     bullet_summary: str = "",
     mindmap_code: str = "",
-    flowchart_code: str = ""
+    flowchart_code: str = "",
+    user_id: int = None
 ) -> DocumentModel:
     """Inserts an uploaded document metadata into the SQLite database."""
     db_doc = DocumentModel(
@@ -112,16 +150,20 @@ def create_document(
         mindmap_code=mindmap_code,
         flowchart_code=flowchart_code,
         chunk_count=chunk_count,
-        file_path=file_path
+        file_path=file_path,
+        user_id=user_id
     )
     db.add(db_doc)
     db.commit()
     db.refresh(db_doc)
     return db_doc
 
-def get_all_documents(db: Session, skip: int = 0, limit: int = 100) -> list[DocumentModel]:
+def get_all_documents(db: Session, skip: int = 0, limit: int = 100, user_id: int = None) -> list[DocumentModel]:
     """Retrieves all stored uploaded documents ordered by creation date."""
-    return db.query(DocumentModel).order_by(DocumentModel.created_at.desc()).offset(skip).limit(limit).all()
+    query = db.query(DocumentModel)
+    if user_id is not None:
+        query = query.filter(DocumentModel.user_id == user_id)
+    return query.order_by(DocumentModel.created_at.desc()).offset(skip).limit(limit).all()
 
 def get_document(db: Session, doc_id: int) -> DocumentModel | None:
     """Retrieves a single uploaded document by ID."""
@@ -135,5 +177,3 @@ def delete_document(db: Session, doc_id: int) -> bool:
         db.commit()
         return True
     return False
-
-

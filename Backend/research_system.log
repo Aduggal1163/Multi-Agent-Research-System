@@ -1061,3 +1061,376 @@ sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) NOT NULL constraint fail
 2026-07-31 21:20:58,477 | api | INFO | API: Research workflow completed. Score: 0.85, Iterations: 1
 2026-07-31 21:20:58,477 | api | INFO | API: Writing results to database...
 2026-07-31 21:20:58,480 | api | INFO | API: Research report successfully saved with ID: 10
+2026-07-31 21:32:59,259 | api | INFO | Shutting down FastAPI application...
+2026-07-31 21:33:01,448 | api | INFO | Compiling workflow graph...
+2026-07-31 21:33:01,448 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 21:33:01,449 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 21:33:01,449 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 21:33:01,449 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 21:33:01,449 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 21:33:01,449 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 21:33:01,449 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 21:33:01,449 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 21:33:01,449 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 21:33:01,449 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 21:33:01,450 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 21:33:01,450 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 21:33:01,450 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 21:33:01,450 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 21:33:01,450 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 21:33:01,450 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 21:33:01,450 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 21:33:01,457 | api | INFO | Workflow graph compiled successfully.
+2026-07-31 21:33:01,496 | api | INFO | Compiling workflow graph...
+2026-07-31 21:33:01,496 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 21:33:01,496 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 21:33:01,496 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 21:33:01,496 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 21:33:01,497 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 21:33:01,497 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 21:33:01,497 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 21:33:01,497 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 21:33:01,497 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 21:33:01,497 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 21:33:01,497 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 21:33:01,497 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 21:33:01,497 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 21:33:01,497 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 21:33:01,497 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 21:33:01,497 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 21:33:01,497 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 21:33:01,502 | api | INFO | Workflow graph compiled successfully.
+2026-07-31 21:33:01,506 | api | INFO | Starting up FastAPI application...
+2026-07-31 21:33:01,506 | api | INFO | Initializing database tables if not existing...
+2026-07-31 21:33:01,509 | api | INFO | Database tables and columns initialized successfully.
+2026-07-31 21:33:07,772 | api | INFO | Shutting down FastAPI application...
+2026-07-31 21:33:09,509 | api | INFO | Compiling workflow graph...
+2026-07-31 21:33:09,509 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 21:33:09,509 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 21:33:09,509 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 21:33:09,509 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 21:33:09,510 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 21:33:09,510 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 21:33:09,510 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 21:33:09,510 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 21:33:09,510 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 21:33:09,510 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 21:33:09,510 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 21:33:09,510 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 21:33:09,510 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 21:33:09,510 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 21:33:09,510 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 21:33:09,510 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 21:33:09,510 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 21:33:09,516 | api | INFO | Workflow graph compiled successfully.
+2026-07-31 21:33:09,551 | api | INFO | Compiling workflow graph...
+2026-07-31 21:33:09,551 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 21:33:09,552 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 21:33:09,552 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 21:33:09,552 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 21:33:09,552 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 21:33:09,552 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 21:33:09,552 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 21:33:09,552 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 21:33:09,552 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 21:33:09,552 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 21:33:09,552 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 21:33:09,552 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 21:33:09,552 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 21:33:09,553 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 21:33:09,553 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 21:33:09,553 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 21:33:09,553 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 21:33:09,558 | api | INFO | Workflow graph compiled successfully.
+2026-07-31 21:33:09,563 | api | INFO | Starting up FastAPI application...
+2026-07-31 21:33:09,563 | api | INFO | Initializing database tables if not existing...
+2026-07-31 21:33:09,565 | api | INFO | Database tables and columns initialized successfully.
+2026-07-31 21:33:15,426 | api | INFO | Shutting down FastAPI application...
+2026-07-31 21:33:17,167 | api | INFO | Compiling workflow graph...
+2026-07-31 21:33:17,167 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 21:33:17,167 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 21:33:17,167 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 21:33:17,167 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 21:33:17,168 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 21:33:17,168 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 21:33:17,168 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 21:33:17,168 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 21:33:17,168 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 21:33:17,168 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 21:33:17,168 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 21:33:17,168 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 21:33:17,168 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 21:33:17,168 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 21:33:17,168 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 21:33:17,168 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 21:33:17,168 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 21:33:17,174 | api | INFO | Workflow graph compiled successfully.
+2026-07-31 21:33:17,206 | api | INFO | Compiling workflow graph...
+2026-07-31 21:33:17,206 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 21:33:17,206 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 21:33:17,206 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 21:33:17,206 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 21:33:17,206 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 21:33:17,206 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 21:33:17,206 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 21:33:17,207 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 21:33:17,207 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 21:33:17,207 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 21:33:17,207 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 21:33:17,207 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 21:33:17,207 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 21:33:17,207 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 21:33:17,207 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 21:33:17,207 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 21:33:17,207 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 21:33:17,212 | api | INFO | Workflow graph compiled successfully.
+2026-07-31 21:33:17,217 | api | INFO | Starting up FastAPI application...
+2026-07-31 21:33:17,217 | api | INFO | Initializing database tables if not existing...
+2026-07-31 21:33:17,219 | api | INFO | Database tables and columns initialized successfully.
+2026-07-31 21:33:20,959 | api | INFO | Shutting down FastAPI application...
+2026-07-31 21:33:22,848 | api | INFO | Compiling workflow graph...
+2026-07-31 21:33:22,849 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 21:33:22,849 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 21:33:22,849 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 21:33:22,849 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 21:33:22,849 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 21:33:22,849 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 21:33:22,850 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 21:33:22,850 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 21:33:22,850 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 21:33:22,850 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 21:33:22,850 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 21:33:22,850 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 21:33:22,850 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 21:33:22,850 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 21:33:22,850 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 21:33:22,850 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 21:33:22,850 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 21:33:22,856 | api | INFO | Workflow graph compiled successfully.
+2026-07-31 21:33:22,888 | api | INFO | Compiling workflow graph...
+2026-07-31 21:33:22,888 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 21:33:22,889 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 21:33:22,889 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 21:33:22,889 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 21:33:22,889 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 21:33:22,889 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 21:33:22,889 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 21:33:22,889 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 21:33:22,890 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 21:33:22,890 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 21:33:22,890 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 21:33:22,890 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 21:33:22,890 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 21:33:22,890 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 21:33:22,890 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 21:33:22,890 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 21:33:22,890 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 21:33:22,895 | api | INFO | Workflow graph compiled successfully.
+2026-07-31 21:33:22,899 | api | INFO | Starting up FastAPI application...
+2026-07-31 21:33:22,899 | api | INFO | Initializing database tables if not existing...
+2026-07-31 21:33:22,901 | api | INFO | Database tables and columns initialized successfully.
+2026-07-31 21:33:28,258 | api | INFO | Shutting down FastAPI application...
+2026-07-31 21:33:30,008 | api | INFO | Compiling workflow graph...
+2026-07-31 21:33:30,008 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 21:33:30,008 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 21:33:30,008 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 21:33:30,008 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 21:33:30,009 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 21:33:30,009 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 21:33:30,009 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 21:33:30,009 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 21:33:30,009 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 21:33:30,009 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 21:33:30,009 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 21:33:30,009 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 21:33:30,009 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 21:33:30,009 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 21:33:30,009 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 21:33:30,009 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 21:33:30,009 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 21:33:30,016 | api | INFO | Workflow graph compiled successfully.
+2026-07-31 21:33:30,057 | api | INFO | Compiling workflow graph...
+2026-07-31 21:33:30,057 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 21:33:30,058 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 21:33:30,060 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 21:33:30,060 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 21:33:30,060 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 21:33:30,060 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 21:33:30,060 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 21:33:30,060 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 21:33:30,060 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 21:33:30,060 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 21:33:30,060 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 21:33:30,061 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 21:33:30,061 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 21:33:30,061 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 21:33:30,061 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 21:33:30,061 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 21:33:30,061 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 21:33:30,067 | api | INFO | Workflow graph compiled successfully.
+2026-07-31 21:33:30,074 | api | INFO | Starting up FastAPI application...
+2026-07-31 21:33:30,074 | api | INFO | Initializing database tables if not existing...
+2026-07-31 21:33:30,076 | api | INFO | Database tables and columns initialized successfully.
+2026-07-31 21:33:36,339 | api | INFO | Shutting down FastAPI application...
+2026-07-31 21:33:38,089 | api | INFO | Compiling workflow graph...
+2026-07-31 21:33:38,089 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 21:33:38,089 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 21:33:38,089 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 21:33:38,090 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 21:33:38,090 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 21:33:38,090 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 21:33:38,090 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 21:33:38,090 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 21:33:38,090 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 21:33:38,090 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 21:33:38,090 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 21:33:38,090 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 21:33:38,090 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 21:33:38,090 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 21:33:38,090 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 21:33:38,090 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 21:33:38,090 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 21:33:38,096 | api | INFO | Workflow graph compiled successfully.
+2026-07-31 21:33:38,132 | api | INFO | Compiling workflow graph...
+2026-07-31 21:33:38,132 | graph | INFO | Initializing multi-agent research workflow graph
+2026-07-31 21:33:38,133 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-07-31 21:33:38,133 | graph | INFO |   Node: 'split' -> split_questions
+2026-07-31 21:33:38,133 | graph | INFO |   Node: 'research1' -> market.research1
+2026-07-31 21:33:38,133 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-07-31 21:33:38,133 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-07-31 21:33:38,133 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-07-31 21:33:38,133 | graph | INFO |   Node: 'report' -> report_writer
+2026-07-31 21:33:38,133 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-07-31 21:33:38,133 | graph | INFO |   Node: 'quality' -> quality_check
+2026-07-31 21:33:38,133 | graph | INFO | Registering connecting edges in the graph:
+2026-07-31 21:33:38,133 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-07-31 21:33:38,133 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-07-31 21:33:38,133 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-07-31 21:33:38,133 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-07-31 21:33:38,133 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-07-31 21:33:38,133 | graph | INFO | Compiling workflow graph successfully
+2026-07-31 21:33:38,139 | api | INFO | Workflow graph compiled successfully.
+2026-07-31 21:33:38,143 | api | INFO | Starting up FastAPI application...
+2026-07-31 21:33:38,144 | api | INFO | Initializing database tables if not existing...
+2026-07-31 21:33:38,146 | api | INFO | Database tables and columns initialized successfully.
+2026-07-31 21:36:34,374 | api | INFO | Shutting down FastAPI application...
+2026-08-01 10:37:29,625 | main | INFO | Multi-agent research CLI demo initialized
+2026-08-01 10:37:29,625 | main | INFO | Creating database tables if they do not exist...
+2026-08-01 10:37:29,631 | main | INFO | Database tables initialized successfully
+2026-08-01 10:37:29,631 | graph | INFO | Initializing multi-agent research workflow graph
+2026-08-01 10:37:29,632 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-08-01 10:37:29,632 | graph | INFO |   Node: 'split' -> split_questions
+2026-08-01 10:37:29,632 | graph | INFO |   Node: 'research1' -> market.research1
+2026-08-01 10:37:29,632 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-08-01 10:37:29,632 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-08-01 10:37:29,632 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-08-01 10:37:29,632 | graph | INFO |   Node: 'report' -> report_writer
+2026-08-01 10:37:29,632 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-08-01 10:37:29,632 | graph | INFO |   Node: 'quality' -> quality_check
+2026-08-01 10:37:29,633 | graph | INFO | Registering connecting edges in the graph:
+2026-08-01 10:37:29,633 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-08-01 10:37:29,633 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-08-01 10:37:29,633 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-08-01 10:37:29,633 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-08-01 10:37:29,633 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-08-01 10:37:29,633 | graph | INFO | Compiling workflow graph successfully
+2026-08-01 10:43:03,517 | main | INFO | Multi-agent research CLI demo initialized
+2026-08-01 10:43:03,517 | main | INFO | Creating database tables if they do not exist...
+2026-08-01 10:43:03,518 | main | INFO | Database tables initialized successfully
+2026-08-01 10:43:03,519 | graph | INFO | Initializing multi-agent research workflow graph
+2026-08-01 10:43:03,519 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-08-01 10:43:03,519 | graph | INFO |   Node: 'split' -> split_questions
+2026-08-01 10:43:03,519 | graph | INFO |   Node: 'research1' -> market.research1
+2026-08-01 10:43:03,519 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-08-01 10:43:03,519 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-08-01 10:43:03,519 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-08-01 10:43:03,519 | graph | INFO |   Node: 'report' -> report_writer
+2026-08-01 10:43:03,519 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-08-01 10:43:03,519 | graph | INFO |   Node: 'quality' -> quality_check
+2026-08-01 10:43:03,520 | graph | INFO | Registering connecting edges in the graph:
+2026-08-01 10:43:03,520 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-08-01 10:43:03,520 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-08-01 10:43:03,520 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-08-01 10:43:03,520 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-08-01 10:43:03,520 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-08-01 10:43:03,520 | graph | INFO | Compiling workflow graph successfully
+2026-08-01 10:44:12,185 | api | INFO | Compiling workflow graph...
+2026-08-01 10:44:12,185 | graph | INFO | Initializing multi-agent research workflow graph
+2026-08-01 10:44:12,185 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-08-01 10:44:12,185 | graph | INFO |   Node: 'split' -> split_questions
+2026-08-01 10:44:12,185 | graph | INFO |   Node: 'research1' -> market.research1
+2026-08-01 10:44:12,185 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-08-01 10:44:12,186 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-08-01 10:44:12,186 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-08-01 10:44:12,186 | graph | INFO |   Node: 'report' -> report_writer
+2026-08-01 10:44:12,186 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-08-01 10:44:12,186 | graph | INFO |   Node: 'quality' -> quality_check
+2026-08-01 10:44:12,186 | graph | INFO | Registering connecting edges in the graph:
+2026-08-01 10:44:12,186 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-08-01 10:44:12,186 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-08-01 10:44:12,186 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-08-01 10:44:12,186 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-08-01 10:44:12,186 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-08-01 10:44:12,186 | graph | INFO | Compiling workflow graph successfully
+2026-08-01 10:44:12,193 | api | INFO | Workflow graph compiled successfully.
+2026-08-01 10:44:14,014 | api | INFO | Compiling workflow graph...
+2026-08-01 10:44:14,014 | graph | INFO | Initializing multi-agent research workflow graph
+2026-08-01 10:44:14,014 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-08-01 10:44:14,015 | graph | INFO |   Node: 'split' -> split_questions
+2026-08-01 10:44:14,015 | graph | INFO |   Node: 'research1' -> market.research1
+2026-08-01 10:44:14,015 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-08-01 10:44:14,015 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-08-01 10:44:14,015 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-08-01 10:44:14,015 | graph | INFO |   Node: 'report' -> report_writer
+2026-08-01 10:44:14,015 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-08-01 10:44:14,015 | graph | INFO |   Node: 'quality' -> quality_check
+2026-08-01 10:44:14,015 | graph | INFO | Registering connecting edges in the graph:
+2026-08-01 10:44:14,015 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-08-01 10:44:14,015 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-08-01 10:44:14,015 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-08-01 10:44:14,015 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-08-01 10:44:14,015 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-08-01 10:44:14,015 | graph | INFO | Compiling workflow graph successfully
+2026-08-01 10:44:14,021 | api | INFO | Workflow graph compiled successfully.
+2026-08-01 10:44:14,085 | api | INFO | Compiling workflow graph...
+2026-08-01 10:44:14,085 | graph | INFO | Initializing multi-agent research workflow graph
+2026-08-01 10:44:14,085 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-08-01 10:44:14,085 | graph | INFO |   Node: 'split' -> split_questions
+2026-08-01 10:44:14,085 | graph | INFO |   Node: 'research1' -> market.research1
+2026-08-01 10:44:14,086 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-08-01 10:44:14,086 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-08-01 10:44:14,086 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-08-01 10:44:14,086 | graph | INFO |   Node: 'report' -> report_writer
+2026-08-01 10:44:14,086 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-08-01 10:44:14,086 | graph | INFO |   Node: 'quality' -> quality_check
+2026-08-01 10:44:14,086 | graph | INFO | Registering connecting edges in the graph:
+2026-08-01 10:44:14,086 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-08-01 10:44:14,086 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-08-01 10:44:14,086 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-08-01 10:44:14,086 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-08-01 10:44:14,086 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-08-01 10:44:14,086 | graph | INFO | Compiling workflow graph successfully
+2026-08-01 10:44:14,091 | api | INFO | Workflow graph compiled successfully.
+2026-08-01 10:44:14,096 | api | INFO | Starting up FastAPI application...
+2026-08-01 10:44:14,096 | api | INFO | Initializing database tables if not existing...
+2026-08-01 10:44:14,098 | api | INFO | Database tables and columns initialized successfully.
+2026-08-01 10:44:44,154 | main | INFO | Multi-agent research CLI demo initialized
+2026-08-01 10:44:44,154 | main | INFO | Creating database tables if they do not exist...
+2026-08-01 10:44:44,155 | main | INFO | Database tables initialized successfully
+2026-08-01 10:44:44,155 | graph | INFO | Initializing multi-agent research workflow graph
+2026-08-01 10:44:44,155 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-08-01 10:44:44,155 | graph | INFO |   Node: 'split' -> split_questions
+2026-08-01 10:44:44,155 | graph | INFO |   Node: 'research1' -> market.research1
+2026-08-01 10:44:44,155 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-08-01 10:44:44,156 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-08-01 10:44:44,156 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-08-01 10:44:44,156 | graph | INFO |   Node: 'report' -> report_writer
+2026-08-01 10:44:44,156 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-08-01 10:44:44,156 | graph | INFO |   Node: 'quality' -> quality_check
+2026-08-01 10:44:44,156 | graph | INFO | Registering connecting edges in the graph:
+2026-08-01 10:44:44,156 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-08-01 10:44:44,156 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-08-01 10:44:44,156 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-08-01 10:44:44,156 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-08-01 10:44:44,156 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-08-01 10:44:44,156 | graph | INFO | Compiling workflow graph successfully
