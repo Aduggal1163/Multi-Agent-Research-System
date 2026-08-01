@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { fetchReports, generateResearch, deleteReport } from '../services/api';
+import { useAuth } from '../context/AuthContext';
 
 const WORKFLOW_STEPS = [
   { label: "Deconstructing topic & extracting Document/Web research vectors", agent: "LangGraph Supervisor" },
@@ -10,6 +11,7 @@ const WORKFLOW_STEPS = [
 ];
 
 export function useResearch(showToast, isDemoMode = false) {
+  const { token } = useAuth();
   const [history, setHistory] = useState([]);
   const [activeReport, setActiveReport] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -25,13 +27,19 @@ export function useResearch(showToast, isDemoMode = false) {
   });
 
   const loadHistory = useCallback(async () => {
+    if (!token && !isDemoMode) {
+      setHistory([]);
+      setActiveReport(null);
+      return;
+    }
     try {
       const data = await fetchReports(isDemoMode);
-      setHistory(data);
+      setHistory(data || []);
     } catch (err) {
       console.error(err);
+      setHistory([]);
     }
-  }, [isDemoMode]);
+  }, [isDemoMode, token]);
 
   useEffect(() => {
     loadHistory();

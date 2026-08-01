@@ -371,10 +371,12 @@ async def upload_document(
 def list_documents(
     skip: int = 0,
     limit: int = 100,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user)
 ):
     try:
-        return get_all_documents(db=db, skip=skip, limit=limit)
+        user_id = current_user.id if current_user else None
+        return get_all_documents(db=db, skip=skip, limit=limit, user_id=user_id)
     except Exception as e:
         logger.error("Failed to list documents: %s", str(e))
         return []

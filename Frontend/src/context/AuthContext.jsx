@@ -55,6 +55,7 @@ export function AuthProvider({ children }) {
     setUser(null);
     localStorage.removeItem('auth_token');
     localStorage.removeItem('auth_user');
+    localStorage.removeItem('pinned_reports');
   };
 
   const openLoginModal = () => {

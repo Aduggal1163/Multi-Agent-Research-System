@@ -69,6 +69,8 @@ def get_all_research_reports(db: Session, skip: int = 0, limit: int = 100, user_
     query = db.query(ResearchReport)
     if user_id is not None:
         query = query.filter(ResearchReport.user_id == user_id)
+    else:
+        query = query.filter(ResearchReport.user_id.is_(None))
     return query.order_by(ResearchReport.created_at.desc()).offset(skip).limit(limit).all()
 
 def delete_research_report(db: Session, report_id: int) -> bool:
@@ -163,6 +165,8 @@ def get_all_documents(db: Session, skip: int = 0, limit: int = 100, user_id: int
     query = db.query(DocumentModel)
     if user_id is not None:
         query = query.filter(DocumentModel.user_id == user_id)
+    else:
+        query = query.filter(DocumentModel.user_id.is_(None))
     return query.order_by(DocumentModel.created_at.desc()).offset(skip).limit(limit).all()
 
 def get_document(db: Session, doc_id: int) -> DocumentModel | None:

@@ -1,19 +1,27 @@
 import { useState, useEffect, useCallback } from 'react';
 import { fetchDocuments, uploadDocument, deleteDocument } from '../services/api';
+import { useAuth } from '../context/AuthContext';
 
 export function useKnowledgeBase(showToast, isDemoMode = false) {
+  const { token } = useAuth();
   const [documents, setDocuments] = useState([]);
   const [selectedDoc, setSelectedDoc] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
 
   const loadDocuments = useCallback(async () => {
+    if (!token && !isDemoMode) {
+      setDocuments([]);
+      setSelectedDoc(null);
+      return;
+    }
     try {
       const data = await fetchDocuments(isDemoMode);
-      setDocuments(data);
+      setDocuments(data || []);
     } catch (err) {
       console.error(err);
+      setDocuments([]);
     }
-  }, [isDemoMode]);
+  }, [isDemoMode, token]);
 
   useEffect(() => {
     loadDocuments();

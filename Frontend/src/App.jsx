@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { AuthModal } from './components/auth/AuthModal';
 import { NavbarDock } from './components/layout/NavbarDock';
@@ -24,6 +24,13 @@ function MainAppContent() {
   const [searchTerm, setSearchTerm] = useState('');
   const [isDemoMode, setIsDemoMode] = useState(false);
   const { isAuthenticated, openLoginModal } = useAuth();
+
+  // Automatically redirect unauthenticated users to landing page
+  React.useEffect(() => {
+    if (!isAuthenticated && activeTab !== 'landing') {
+      setActiveTab('landing');
+    }
+  }, [isAuthenticated, activeTab]);
 
   // Modal States
   const [exportingReport, setExportingReport] = useState(null);

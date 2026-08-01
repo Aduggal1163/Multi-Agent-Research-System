@@ -1434,3 +1434,277 @@ sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) NOT NULL constraint fail
 2026-08-01 10:44:44,156 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
 2026-08-01 10:44:44,156 | graph | INFO |   Edge: improve_report -> quality (Review loop)
 2026-08-01 10:44:44,156 | graph | INFO | Compiling workflow graph successfully
+2026-08-01 10:48:31,845 | api | INFO | API: POST /research called by user ID 1 for query: 'LangGraph Multi-Agent Workflows'
+2026-08-01 10:48:31,846 | api | INFO | API: Initiating LangGraph research workflow for query: 'LangGraph Multi-Agent Workflows'
+2026-08-01 10:48:31,913 | agents.splitter | INFO | Splitter Agent started processing user query: 'LangGraph Multi-Agent Workflows'
+2026-08-01 10:48:31,914 | agents.splitter | INFO | Invoking LLM to split user query into 3 distinct research questions...
+2026-08-01 10:48:34,307 | agents.splitter | INFO | Successfully generated 3 questions
+2026-08-01 10:48:34,307 | agents.splitter | INFO |   Question 1: What are the current market trends and demands for multi-agent workflows in the context of LangGraph technology?
+2026-08-01 10:48:34,307 | agents.splitter | INFO |   Question 2: Who are the key competitors in the multi-agent workflow space, and what differentiates their offerings from LangGraph?
+2026-08-01 10:48:34,307 | agents.splitter | INFO |   Question 3: What emerging technologies and revenue models are influencing the future development of multi-agent workflows, particularly in relation to LangGraph?
+2026-08-01 10:48:34,308 | agents.market | INFO | Market Agent started processing research task
+2026-08-01 10:48:34,309 | agents.competitor | INFO | Competitor Agent started processing research task
+2026-08-01 10:48:34,309 | agents.market | INFO | Market analysis target question: 'What are the current market trends and demands for multi-agent workflows in the context of LangGraph technology?'
+2026-08-01 10:48:34,309 | agents.competitor | INFO | Competitor analysis target question: 'Who are the key competitors in the multi-agent workflow space, and what differentiates their offerings from LangGraph?'
+2026-08-01 10:48:34,310 | agents.competitor | INFO | Invoking Tavily Search for competitor research...
+2026-08-01 10:48:34,310 | agents.market | INFO | Invoking Tavily Search for market research...
+2026-08-01 10:48:34,309 | agents.innovation | INFO | Innovation & Tech Agent started processing research task
+2026-08-01 10:48:34,311 | agents.innovation | INFO | Innovation analysis target question: 'What emerging technologies and revenue models are influencing the future development of multi-agent workflows, particularly in relation to LangGraph?'
+2026-08-01 10:48:34,311 | agents.innovation | INFO | Invoking Tavily Search for technology trends research...
+2026-08-01 10:48:36,853 | agents.market | INFO | Tavily search completed successfully with results length: 12451 chars
+2026-08-01 10:48:36,853 | agents.market | INFO | Invoking Market LLM to analyze search findings...
+2026-08-01 10:48:36,858 | agents.competitor | INFO | Tavily search completed successfully with results length: 10887 chars
+2026-08-01 10:48:36,858 | agents.competitor | INFO | Invoking Competitor LLM to analyze search findings...
+2026-08-01 10:48:37,034 | agents.innovation | INFO | Tavily search completed successfully with results length: 12785 chars
+2026-08-01 10:48:37,034 | agents.innovation | INFO | Invoking Creative LLM to analyze search findings...
+2026-08-01 10:48:41,654 | agents.market | INFO | Market analysis completed. Generated output size: 2868 characters
+2026-08-01 10:48:41,862 | agents.innovation | INFO | Innovation analysis completed. Generated output size: 3388 characters
+2026-08-01 10:48:44,112 | agents.competitor | INFO | Competitor analysis completed. Generated output size: 3311 characters
+2026-08-01 10:48:44,113 | agents.synthesis | INFO | Synthesis & Analyst Agent started processing collected research results
+2026-08-01 10:48:44,114 | agents.synthesis | INFO | Retrieved 3 individual research agent response(s) to synthesize
+2026-08-01 10:48:44,114 | agents.synthesis | INFO | Aggregated text size for synthesis: 9571 characters
+2026-08-01 10:48:44,114 | agents.synthesis | INFO | Invoking LLM to synthesize research findings into high-level analysis...
+2026-08-01 10:48:48,820 | agents.synthesis | INFO | Synthesis successfully completed. Output size: 2391 characters
+2026-08-01 10:48:48,822 | agents.report | INFO | Report Writer Agent started drafting initial report (Current Iteration: 0)
+2026-08-01 10:48:48,822 | agents.report | INFO | Synthesized Analysis size: 2391 characters
+2026-08-01 10:48:48,822 | agents.report | INFO | Invoking LLM to write initial structured research report...
+2026-08-01 10:48:54,022 | agents.report | INFO | Draft report generation complete. Generated report size: 3120 characters. Next iteration sequence set to: 1
+2026-08-01 10:48:54,024 | agents.reviewer | INFO | Quality Checker Agent started evaluating report (Current Iteration: 1)
+2026-08-01 10:48:54,025 | agents.reviewer | INFO | Report size for evaluation: 3120 characters
+2026-08-01 10:48:54,025 | agents.reviewer | INFO | Invoking LLM to perform quality review evaluation...
+2026-08-01 10:48:55,172 | agents.reviewer | INFO | Quality Checker evaluation finished:
+2026-08-01 10:48:55,172 | agents.reviewer | INFO |   Assigned Score: 0.85
+2026-08-01 10:48:55,172 | agents.reviewer | INFO |   Assigned Feedback: 'The report is comprehensive and covers key aspects of LangGraph's multi-agent workflows effectively. However, it could benefit from a more detailed competitive analysis to enhance its completeness and provide clearer insights into the market landscape.'
+2026-08-01 10:48:55,172 | agents.reviewer | INFO | Review Router making routing decision:
+2026-08-01 10:48:55,173 | agents.reviewer | INFO |   Current Iteration: 1 / Maximum Iterations: 3
+2026-08-01 10:48:55,173 | agents.reviewer | INFO |   Current Quality Score: 0.85 / Target Quality Score: 0.80
+2026-08-01 10:48:55,173 | agents.reviewer | INFO |   Route Action: END (Reason: Target quality score met/exceeded)
+2026-08-01 10:48:55,176 | api | INFO | API: Research workflow completed. Score: 0.85, Iterations: 1
+2026-08-01 10:48:55,176 | api | INFO | API: Writing results to database...
+2026-08-01 10:48:55,180 | api | INFO | API: Research report successfully saved with ID: 1
+2026-08-01 10:49:19,611 | api | INFO | API: POST /research called by user ID 1 for query: 'LangGraph Multi-Agent Workflows'
+2026-08-01 10:49:19,611 | api | INFO | API: Initiating LangGraph research workflow for query: 'LangGraph Multi-Agent Workflows'
+2026-08-01 10:49:19,613 | agents.splitter | INFO | Splitter Agent started processing user query: 'LangGraph Multi-Agent Workflows'
+2026-08-01 10:49:19,614 | agents.splitter | INFO | Invoking LLM to split user query into 3 distinct research questions...
+2026-08-01 10:49:20,976 | agents.splitter | INFO | Successfully generated 3 questions
+2026-08-01 10:49:20,976 | agents.splitter | INFO |   Question 1: What are the current market trends and demands for multi-agent workflows in the context of LangGraph technology?
+2026-08-01 10:49:20,976 | agents.splitter | INFO |   Question 2: Who are the key competitors in the multi-agent workflow space, and what differentiates their offerings from LangGraph?
+2026-08-01 10:49:20,976 | agents.splitter | INFO |   Question 3: How can emerging technologies enhance LangGraph's multi-agent workflows, and what potential revenue models could be developed to capitalize on future trends in this area?
+2026-08-01 10:49:20,978 | agents.market | INFO | Market Agent started processing research task
+2026-08-01 10:49:20,978 | agents.market | INFO | Market analysis target question: 'What are the current market trends and demands for multi-agent workflows in the context of LangGraph technology?'
+2026-08-01 10:49:20,978 | agents.market | INFO | Invoking Tavily Search for market research...
+2026-08-01 10:49:20,978 | agents.competitor | INFO | Competitor Agent started processing research task
+2026-08-01 10:49:20,979 | agents.competitor | INFO | Competitor analysis target question: 'Who are the key competitors in the multi-agent workflow space, and what differentiates their offerings from LangGraph?'
+2026-08-01 10:49:20,979 | agents.innovation | INFO | Innovation & Tech Agent started processing research task
+2026-08-01 10:49:20,981 | agents.innovation | INFO | Innovation analysis target question: 'How can emerging technologies enhance LangGraph's multi-agent workflows, and what potential revenue models could be developed to capitalize on future trends in this area?'
+2026-08-01 10:49:20,980 | agents.competitor | INFO | Invoking Tavily Search for competitor research...
+2026-08-01 10:49:20,981 | agents.innovation | INFO | Invoking Tavily Search for technology trends research...
+2026-08-01 10:49:21,799 | agents.competitor | INFO | Tavily search completed successfully with results length: 10886 chars
+2026-08-01 10:49:21,800 | agents.competitor | INFO | Invoking Competitor LLM to analyze search findings...
+2026-08-01 10:49:22,044 | agents.market | INFO | Tavily search completed successfully with results length: 12450 chars
+2026-08-01 10:49:22,044 | agents.market | INFO | Invoking Market LLM to analyze search findings...
+2026-08-01 10:49:24,150 | agents.innovation | INFO | Tavily search completed successfully with results length: 12586 chars
+2026-08-01 10:49:24,151 | agents.innovation | INFO | Invoking Creative LLM to analyze search findings...
+2026-08-01 10:49:28,298 | agents.competitor | INFO | Competitor analysis completed. Generated output size: 3297 characters
+2026-08-01 10:49:29,884 | agents.market | INFO | Market analysis completed. Generated output size: 3202 characters
+2026-08-01 10:49:30,490 | agents.innovation | INFO | Innovation analysis completed. Generated output size: 4072 characters
+2026-08-01 10:49:30,492 | agents.synthesis | INFO | Synthesis & Analyst Agent started processing collected research results
+2026-08-01 10:49:30,492 | agents.synthesis | INFO | Retrieved 3 individual research agent response(s) to synthesize
+2026-08-01 10:49:30,492 | agents.synthesis | INFO | Aggregated text size for synthesis: 10575 characters
+2026-08-01 10:49:30,492 | agents.synthesis | INFO | Invoking LLM to synthesize research findings into high-level analysis...
+2026-08-01 10:49:34,390 | agents.synthesis | INFO | Synthesis successfully completed. Output size: 2407 characters
+2026-08-01 10:49:34,391 | agents.report | INFO | Report Writer Agent started drafting initial report (Current Iteration: 0)
+2026-08-01 10:49:34,391 | agents.report | INFO | Synthesized Analysis size: 2407 characters
+2026-08-01 10:49:34,391 | agents.report | INFO | Invoking LLM to write initial structured research report...
+2026-08-01 10:49:38,996 | agents.report | INFO | Draft report generation complete. Generated report size: 3207 characters. Next iteration sequence set to: 1
+2026-08-01 10:49:38,998 | agents.reviewer | INFO | Quality Checker Agent started evaluating report (Current Iteration: 1)
+2026-08-01 10:49:38,999 | agents.reviewer | INFO | Report size for evaluation: 3207 characters
+2026-08-01 10:49:38,999 | agents.reviewer | INFO | Invoking LLM to perform quality review evaluation...
+2026-08-01 10:49:40,330 | agents.reviewer | INFO | Quality Checker evaluation finished:
+2026-08-01 10:49:40,330 | agents.reviewer | INFO |   Assigned Score: 0.85
+2026-08-01 10:49:40,330 | agents.reviewer | INFO |   Assigned Feedback: 'The report is comprehensive and provides a thorough analysis of LangGraph's position in the multi-agent workflows market. However, while the findings are insightful, the lack of specific market size data could hinder actionable insights for strategic planning.'
+2026-08-01 10:49:40,331 | agents.reviewer | INFO | Review Router making routing decision:
+2026-08-01 10:49:40,331 | agents.reviewer | INFO |   Current Iteration: 1 / Maximum Iterations: 3
+2026-08-01 10:49:40,331 | agents.reviewer | INFO |   Current Quality Score: 0.85 / Target Quality Score: 0.80
+2026-08-01 10:49:40,331 | agents.reviewer | INFO |   Route Action: END (Reason: Target quality score met/exceeded)
+2026-08-01 10:49:40,333 | api | INFO | API: Research workflow completed. Score: 0.85, Iterations: 1
+2026-08-01 10:49:40,333 | api | INFO | API: Writing results to database...
+2026-08-01 10:49:40,335 | api | INFO | API: Research report successfully saved with ID: 2
+2026-08-01 10:49:47,898 | api | INFO | API: POST /upload called by user ID 1 for filename: 'AbhishekDuggal-Resume.pdf'
+2026-08-01 10:49:47,899 | api | INFO | Saved upload to /Users/abhishekduggal/Desktop/Multi-agent Research System/Backend/uploads/AbhishekDuggal-Resume.pdf
+2026-08-01 10:49:55,074 | api | INFO | InMemoryVectorStore indexing completed for AbhishekDuggal-Resume.pdf
+2026-08-01 10:50:04,297 | api | INFO | API: Document upload complete. Saved ID: 1
+2026-08-01 10:52:16,447 | api | INFO | Shutting down FastAPI application...
+2026-08-01 10:52:18,477 | api | INFO | Compiling workflow graph...
+2026-08-01 10:52:18,477 | graph | INFO | Initializing multi-agent research workflow graph
+2026-08-01 10:52:18,477 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-08-01 10:52:18,477 | graph | INFO |   Node: 'split' -> split_questions
+2026-08-01 10:52:18,478 | graph | INFO |   Node: 'research1' -> market.research1
+2026-08-01 10:52:18,478 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-08-01 10:52:18,478 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-08-01 10:52:18,478 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-08-01 10:52:18,478 | graph | INFO |   Node: 'report' -> report_writer
+2026-08-01 10:52:18,478 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-08-01 10:52:18,478 | graph | INFO |   Node: 'quality' -> quality_check
+2026-08-01 10:52:18,478 | graph | INFO | Registering connecting edges in the graph:
+2026-08-01 10:52:18,478 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-08-01 10:52:18,478 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-08-01 10:52:18,478 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-08-01 10:52:18,478 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-08-01 10:52:18,478 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-08-01 10:52:18,478 | graph | INFO | Compiling workflow graph successfully
+2026-08-01 10:52:18,485 | api | INFO | Workflow graph compiled successfully.
+2026-08-01 10:52:18,529 | api | INFO | Compiling workflow graph...
+2026-08-01 10:52:18,529 | graph | INFO | Initializing multi-agent research workflow graph
+2026-08-01 10:52:18,530 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-08-01 10:52:18,530 | graph | INFO |   Node: 'split' -> split_questions
+2026-08-01 10:52:18,530 | graph | INFO |   Node: 'research1' -> market.research1
+2026-08-01 10:52:18,530 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-08-01 10:52:18,530 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-08-01 10:52:18,530 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-08-01 10:52:18,530 | graph | INFO |   Node: 'report' -> report_writer
+2026-08-01 10:52:18,530 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-08-01 10:52:18,530 | graph | INFO |   Node: 'quality' -> quality_check
+2026-08-01 10:52:18,530 | graph | INFO | Registering connecting edges in the graph:
+2026-08-01 10:52:18,530 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-08-01 10:52:18,530 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-08-01 10:52:18,530 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-08-01 10:52:18,530 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-08-01 10:52:18,531 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-08-01 10:52:18,531 | graph | INFO | Compiling workflow graph successfully
+2026-08-01 10:52:18,536 | api | INFO | Workflow graph compiled successfully.
+2026-08-01 10:52:18,540 | api | INFO | Starting up FastAPI application...
+2026-08-01 10:52:18,540 | api | INFO | Initializing database tables if not existing...
+2026-08-01 10:52:18,543 | api | INFO | Database tables and columns initialized successfully.
+2026-08-01 10:52:31,975 | api | INFO | Shutting down FastAPI application...
+2026-08-01 10:52:33,740 | api | INFO | Compiling workflow graph...
+2026-08-01 10:52:33,740 | graph | INFO | Initializing multi-agent research workflow graph
+2026-08-01 10:52:33,740 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-08-01 10:52:33,740 | graph | INFO |   Node: 'split' -> split_questions
+2026-08-01 10:52:33,741 | graph | INFO |   Node: 'research1' -> market.research1
+2026-08-01 10:52:33,741 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-08-01 10:52:33,741 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-08-01 10:52:33,741 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-08-01 10:52:33,741 | graph | INFO |   Node: 'report' -> report_writer
+2026-08-01 10:52:33,741 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-08-01 10:52:33,741 | graph | INFO |   Node: 'quality' -> quality_check
+2026-08-01 10:52:33,741 | graph | INFO | Registering connecting edges in the graph:
+2026-08-01 10:52:33,742 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-08-01 10:52:33,742 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-08-01 10:52:33,742 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-08-01 10:52:33,742 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-08-01 10:52:33,742 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-08-01 10:52:33,742 | graph | INFO | Compiling workflow graph successfully
+2026-08-01 10:52:33,748 | api | INFO | Workflow graph compiled successfully.
+2026-08-01 10:52:33,782 | api | INFO | Compiling workflow graph...
+2026-08-01 10:52:33,783 | graph | INFO | Initializing multi-agent research workflow graph
+2026-08-01 10:52:33,783 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-08-01 10:52:33,783 | graph | INFO |   Node: 'split' -> split_questions
+2026-08-01 10:52:33,783 | graph | INFO |   Node: 'research1' -> market.research1
+2026-08-01 10:52:33,783 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-08-01 10:52:33,783 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-08-01 10:52:33,784 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-08-01 10:52:33,784 | graph | INFO |   Node: 'report' -> report_writer
+2026-08-01 10:52:33,784 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-08-01 10:52:33,784 | graph | INFO |   Node: 'quality' -> quality_check
+2026-08-01 10:52:33,784 | graph | INFO | Registering connecting edges in the graph:
+2026-08-01 10:52:33,784 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-08-01 10:52:33,784 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-08-01 10:52:33,784 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-08-01 10:52:33,784 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-08-01 10:52:33,784 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-08-01 10:52:33,784 | graph | INFO | Compiling workflow graph successfully
+2026-08-01 10:52:33,791 | api | INFO | Workflow graph compiled successfully.
+2026-08-01 10:52:33,796 | api | INFO | Starting up FastAPI application...
+2026-08-01 10:52:33,796 | api | INFO | Initializing database tables if not existing...
+2026-08-01 10:52:33,798 | api | INFO | Database tables and columns initialized successfully.
+2026-08-01 10:52:36,627 | api | INFO | Shutting down FastAPI application...
+2026-08-01 10:52:38,369 | api | INFO | Compiling workflow graph...
+2026-08-01 10:52:38,369 | graph | INFO | Initializing multi-agent research workflow graph
+2026-08-01 10:52:38,370 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-08-01 10:52:38,370 | graph | INFO |   Node: 'split' -> split_questions
+2026-08-01 10:52:38,370 | graph | INFO |   Node: 'research1' -> market.research1
+2026-08-01 10:52:38,370 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-08-01 10:52:38,370 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-08-01 10:52:38,370 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-08-01 10:52:38,370 | graph | INFO |   Node: 'report' -> report_writer
+2026-08-01 10:52:38,370 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-08-01 10:52:38,370 | graph | INFO |   Node: 'quality' -> quality_check
+2026-08-01 10:52:38,370 | graph | INFO | Registering connecting edges in the graph:
+2026-08-01 10:52:38,370 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-08-01 10:52:38,370 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-08-01 10:52:38,371 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-08-01 10:52:38,371 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-08-01 10:52:38,371 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-08-01 10:52:38,371 | graph | INFO | Compiling workflow graph successfully
+2026-08-01 10:52:38,377 | api | INFO | Workflow graph compiled successfully.
+2026-08-01 10:52:38,412 | api | INFO | Compiling workflow graph...
+2026-08-01 10:52:38,412 | graph | INFO | Initializing multi-agent research workflow graph
+2026-08-01 10:52:38,412 | graph | INFO | Registering agent nodes to the workflow graph:
+2026-08-01 10:52:38,412 | graph | INFO |   Node: 'split' -> split_questions
+2026-08-01 10:52:38,412 | graph | INFO |   Node: 'research1' -> market.research1
+2026-08-01 10:52:38,413 | graph | INFO |   Node: 'research2' -> competitor.research2
+2026-08-01 10:52:38,413 | graph | INFO |   Node: 'research3' -> innovation.research3
+2026-08-01 10:52:38,413 | graph | INFO |   Node: 'synthesis' -> synthesis_analyst
+2026-08-01 10:52:38,413 | graph | INFO |   Node: 'report' -> report_writer
+2026-08-01 10:52:38,413 | graph | INFO |   Node: 'improve_report' -> improve_report
+2026-08-01 10:52:38,413 | graph | INFO |   Node: 'quality' -> quality_check
+2026-08-01 10:52:38,413 | graph | INFO | Registering connecting edges in the graph:
+2026-08-01 10:52:38,413 | graph | INFO |   Edge: split -> research1, research2, research3 (Parallel execution)
+2026-08-01 10:52:38,413 | graph | INFO |   Edge: research1, research2, research3 -> synthesis (Fan-in / Join)
+2026-08-01 10:52:38,413 | graph | INFO |   Edge: synthesis -> report -> quality
+2026-08-01 10:52:38,413 | graph | INFO |   Conditional Edge: quality -> review_router -> {END, improve_report}
+2026-08-01 10:52:38,413 | graph | INFO |   Edge: improve_report -> quality (Review loop)
+2026-08-01 10:52:38,413 | graph | INFO | Compiling workflow graph successfully
+2026-08-01 10:52:38,419 | api | INFO | Workflow graph compiled successfully.
+2026-08-01 10:52:38,425 | api | INFO | Starting up FastAPI application...
+2026-08-01 10:52:38,425 | api | INFO | Initializing database tables if not existing...
+2026-08-01 10:52:38,427 | api | INFO | Database tables and columns initialized successfully.
+2026-08-01 10:53:10,342 | api | INFO | API: POST /research called by user ID 2 for query: 'Zero-Trust Cloud Infrastructure Architecture'
+2026-08-01 10:53:10,342 | api | INFO | API: Initiating LangGraph research workflow for query: 'Zero-Trust Cloud Infrastructure Architecture'
+2026-08-01 10:53:10,398 | agents.splitter | INFO | Splitter Agent started processing user query: 'Zero-Trust Cloud Infrastructure Architecture'
+2026-08-01 10:53:10,400 | agents.splitter | INFO | Invoking LLM to split user query into 3 distinct research questions...
+2026-08-01 10:53:12,432 | agents.splitter | INFO | Successfully generated 3 questions
+2026-08-01 10:53:12,433 | agents.splitter | INFO |   Question 1: What are the key market trends driving the adoption of Zero-Trust Cloud Infrastructure Architecture in various industries?
+2026-08-01 10:53:12,433 | agents.splitter | INFO |   Question 2: Who are the main competitors in the Zero-Trust Cloud Infrastructure space, and what differentiates their offerings?
+2026-08-01 10:53:12,433 | agents.splitter | INFO |   Question 3: How do emerging technologies, such as AI and machine learning, influence the revenue models and future trends of Zero-Trust Cloud Infrastructure Architecture?
+2026-08-01 10:53:12,434 | agents.market | INFO | Market Agent started processing research task
+2026-08-01 10:53:12,436 | agents.market | INFO | Market analysis target question: 'What are the key market trends driving the adoption of Zero-Trust Cloud Infrastructure Architecture in various industries?'
+2026-08-01 10:53:12,435 | agents.innovation | INFO | Innovation & Tech Agent started processing research task
+2026-08-01 10:53:12,436 | agents.market | INFO | Invoking Tavily Search for market research...
+2026-08-01 10:53:12,436 | agents.innovation | INFO | Innovation analysis target question: 'How do emerging technologies, such as AI and machine learning, influence the revenue models and future trends of Zero-Trust Cloud Infrastructure Architecture?'
+2026-08-01 10:53:12,435 | agents.competitor | INFO | Competitor Agent started processing research task
+2026-08-01 10:53:12,437 | agents.innovation | INFO | Invoking Tavily Search for technology trends research...
+2026-08-01 10:53:12,437 | agents.competitor | INFO | Competitor analysis target question: 'Who are the main competitors in the Zero-Trust Cloud Infrastructure space, and what differentiates their offerings?'
+2026-08-01 10:53:12,438 | agents.competitor | INFO | Invoking Tavily Search for competitor research...
+2026-08-01 10:53:15,384 | agents.market | INFO | Tavily search completed successfully with results length: 8746 chars
+2026-08-01 10:53:15,384 | agents.innovation | INFO | Tavily search completed successfully with results length: 10257 chars
+2026-08-01 10:53:15,384 | agents.market | INFO | Invoking Market LLM to analyze search findings...
+2026-08-01 10:53:15,384 | agents.innovation | INFO | Invoking Creative LLM to analyze search findings...
+2026-08-01 10:53:16,010 | agents.competitor | INFO | Tavily search completed successfully with results length: 5530 chars
+2026-08-01 10:53:16,010 | agents.competitor | INFO | Invoking Competitor LLM to analyze search findings...
+2026-08-01 10:53:20,001 | agents.competitor | INFO | Competitor analysis completed. Generated output size: 2184 characters
+2026-08-01 10:53:22,051 | agents.innovation | INFO | Innovation analysis completed. Generated output size: 3588 characters
+2026-08-01 10:53:22,460 | agents.market | INFO | Market analysis completed. Generated output size: 3269 characters
+2026-08-01 10:53:22,463 | agents.synthesis | INFO | Synthesis & Analyst Agent started processing collected research results
+2026-08-01 10:53:22,463 | agents.synthesis | INFO | Retrieved 3 individual research agent response(s) to synthesize
+2026-08-01 10:53:22,463 | agents.synthesis | INFO | Aggregated text size for synthesis: 9045 characters
+2026-08-01 10:53:22,463 | agents.synthesis | INFO | Invoking LLM to synthesize research findings into high-level analysis...
+2026-08-01 10:53:26,787 | agents.synthesis | INFO | Synthesis successfully completed. Output size: 2279 characters
+2026-08-01 10:53:26,789 | agents.report | INFO | Report Writer Agent started drafting initial report (Current Iteration: 0)
+2026-08-01 10:53:26,790 | agents.report | INFO | Synthesized Analysis size: 2279 characters
+2026-08-01 10:53:26,790 | agents.report | INFO | Invoking LLM to write initial structured research report...
+2026-08-01 10:53:31,783 | agents.report | INFO | Draft report generation complete. Generated report size: 3226 characters. Next iteration sequence set to: 1
+2026-08-01 10:53:31,785 | agents.reviewer | INFO | Quality Checker Agent started evaluating report (Current Iteration: 1)
+2026-08-01 10:53:31,786 | agents.reviewer | INFO | Report size for evaluation: 3226 characters
+2026-08-01 10:53:31,786 | agents.reviewer | INFO | Invoking LLM to perform quality review evaluation...
+2026-08-01 10:53:33,116 | agents.reviewer | INFO | Quality Checker evaluation finished:
+2026-08-01 10:53:33,116 | agents.reviewer | INFO |   Assigned Score: 0.85
+2026-08-01 10:53:33,116 | agents.reviewer | INFO |   Assigned Feedback: 'The report is comprehensive and provides a solid overview of the Zero-Trust Cloud Infrastructure Architecture market, including key findings and actionable recommendations. However, it could benefit from a clearer structure, particularly in the analysis section, to enhance readability and facilitate understanding of the competitive landscape.'
+2026-08-01 10:53:33,117 | agents.reviewer | INFO | Review Router making routing decision:
+2026-08-01 10:53:33,117 | agents.reviewer | INFO |   Current Iteration: 1 / Maximum Iterations: 3
+2026-08-01 10:53:33,117 | agents.reviewer | INFO |   Current Quality Score: 0.85 / Target Quality Score: 0.80
+2026-08-01 10:53:33,117 | agents.reviewer | INFO |   Route Action: END (Reason: Target quality score met/exceeded)
+2026-08-01 10:53:33,120 | api | INFO | API: Research workflow completed. Score: 0.85, Iterations: 1
+2026-08-01 10:53:33,120 | api | INFO | API: Writing results to database...
+2026-08-01 10:53:33,125 | api | INFO | API: Research report successfully saved with ID: 3

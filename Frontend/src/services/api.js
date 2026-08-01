@@ -74,7 +74,7 @@ export async function fetchReports(forceDemoMode = false) {
     });
     if (!res.ok) throw new Error('Failed to fetch research reports');
     const data = await res.json();
-    return data.length > 0 ? data : MOCK_REPORTS;
+    return data;
   } catch (err) {
     console.warn('Backend unavailable, falling back to Standalone Demo Mode:', err);
     return MOCK_REPORTS;
@@ -123,7 +123,7 @@ export async function fetchDocuments(forceDemoMode = false) {
     });
     if (!res.ok) throw new Error('Failed to fetch documents');
     const data = await res.json();
-    return data.length > 0 ? data : MOCK_DOCUMENTS;
+    return data;
   } catch (err) {
     console.warn('Backend unavailable, returning demo documents:', err);
     return MOCK_DOCUMENTS;
