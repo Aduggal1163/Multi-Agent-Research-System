@@ -4,6 +4,8 @@ import { AuthModal } from './components/auth/AuthModal';
 import { NavbarDock } from './components/layout/NavbarDock';
 import { Toast } from './components/layout/Toast';
 import { LandingPage } from './components/landing/LandingPage';
+import { FeaturesPage } from './components/landing/FeaturesPage';
+import { SecurityPage } from './components/landing/SecurityPage';
 import { ResearchInput } from './components/research/ResearchInput';
 import { SwarmMonitor } from './components/research/SwarmMonitor';
 import { ReportViewer } from './components/research/ReportViewer';
@@ -19,15 +21,17 @@ import { useToast } from './hooks/useToast';
 import { useResearch } from './hooks/useResearch';
 import { useKnowledgeBase } from './hooks/useKnowledgeBase';
 
+const PUBLIC_TABS = ['landing', 'features', 'pricing', 'docs', 'security'];
+
 function MainAppContent() {
   const [activeTab, setActiveTab] = useState('landing');
   const [searchTerm, setSearchTerm] = useState('');
   const [isDemoMode, setIsDemoMode] = useState(false);
   const { isAuthenticated, openLoginModal } = useAuth();
 
-  // Automatically redirect unauthenticated users to landing page
-  React.useEffect(() => {
-    if (!isAuthenticated && activeTab !== 'landing') {
+  // Automatically redirect unauthenticated users to landing page if on a protected tab
+  useEffect(() => {
+    if (!isAuthenticated && !PUBLIC_TABS.includes(activeTab)) {
       setActiveTab('landing');
     }
   }, [isAuthenticated, activeTab]);
@@ -104,6 +108,14 @@ function MainAppContent() {
               documents={documents}
             />
           )}
+
+          {activeTab === 'features' && (
+            <FeaturesPage 
+              onLaunchWorkspace={() => handleProtectedAction(() => setActiveTab('workspace'))} 
+            />
+          )}
+
+          {activeTab === 'security' && <SecurityPage />}
 
           {activeTab === 'workspace' && (
             <div>

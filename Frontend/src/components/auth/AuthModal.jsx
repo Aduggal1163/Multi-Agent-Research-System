@@ -44,7 +44,7 @@ export function AuthModal({ showToast }) {
         if (showToast) showToast(`Welcome back, ${u.full_name}!`);
       } else {
         const u = await register(email, password, fullName);
-        if (showToast) showToast(`Account created! Welcome to InsightFlow, ${u.full_name}.`);
+        if (showToast) showToast(`Account created! Welcome to SwarmAI, ${u.full_name}.`);
       }
     } catch (err) {
       setErrorMsg(err.message || 'Authentication failed');
@@ -91,7 +91,7 @@ export function AuthModal({ showToast }) {
           </div>
 
           <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', fontWeight: 800 }}>
-            {authModalMode === 'login' ? 'Sign In to InsightFlow' : 'Create Enterprise Account'}
+            {authModalMode === 'login' ? 'Sign In to SwarmAI' : 'Create SwarmAI Account'}
           </h3>
           <p style={{ color: 'var(--text-sub)', fontSize: '0.88rem', marginTop: '0.3rem' }}>
             {authModalMode === 'login' ? 'Access your multi-agent research workspace' : 'Deploy parallel AI swarms with custom data persistence'}

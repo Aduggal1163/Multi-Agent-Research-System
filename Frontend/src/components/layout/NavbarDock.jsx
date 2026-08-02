@@ -100,10 +100,10 @@ export function NavbarDock({
             WebkitTextFillColor: 'transparent',
             letterSpacing: '-0.02em'
           }}>
-            InsightFlow
+            SwarmAI
           </span>
           <span style={{ fontSize: '0.68rem', display: 'block', color: 'var(--text-dim)', fontWeight: 600, marginTop: '-3px' }}>
-            Multi-Agent AI Platform
+            Autonomous Multi-Agent Platform
           </span>
         </div>
       </div>
@@ -118,115 +118,152 @@ export function NavbarDock({
         borderRadius: '9999px',
         border: '1px solid var(--border-glass)'
       }}>
-        <button 
-          className={`nav-item ${activeTab === 'landing' ? 'active' : ''}`}
-          onClick={() => setActiveTab('landing')}
-          style={{ width: 'auto', borderRadius: '9999px', padding: '0.45rem 1rem', fontSize: '0.85rem' }}
-        >
-          <Home size={15} style={{ color: '#c084fc' }} />
-          <span>Home</span>
-        </button>
+        {isAuthenticated ? (
+          <>
+            <button 
+              className={`nav-item ${activeTab === 'landing' ? 'active' : ''}`}
+              onClick={() => setActiveTab('landing')}
+              style={{ width: 'auto', borderRadius: '9999px', padding: '0.45rem 1rem', fontSize: '0.85rem' }}
+            >
+              <Home size={15} style={{ color: '#c084fc' }} />
+              <span>Home</span>
+            </button>
 
-        <button 
-          className={`nav-item ${activeTab === 'workspace' ? 'active' : ''}`}
-          onClick={() => handleProtectedTabClick('workspace')}
-          style={{ width: 'auto', borderRadius: '9999px', padding: '0.45rem 1rem', fontSize: '0.85rem' }}
-        >
-          <Sparkles size={15} style={{ color: '#c084fc' }} />
-          <span>Research Swarm</span>
-        </button>
+            <button 
+              className={`nav-item ${activeTab === 'workspace' ? 'active' : ''}`}
+              onClick={() => handleProtectedTabClick('workspace')}
+              style={{ width: 'auto', borderRadius: '9999px', padding: '0.45rem 1rem', fontSize: '0.85rem' }}
+            >
+              <Sparkles size={15} style={{ color: '#c084fc' }} />
+              <span>Research Swarm</span>
+            </button>
 
-        <button 
-          className={`nav-item ${activeTab === 'knowledge' ? 'active' : ''}`}
-          onClick={() => handleProtectedTabClick('knowledge')}
-          style={{ width: 'auto', borderRadius: '9999px', padding: '0.45rem 1rem', fontSize: '0.85rem' }}
-        >
-          <Database size={15} style={{ color: '#38bdf8' }} />
-          <span>Knowledge Hub</span>
-          {documentsCount > 0 && (
-            <span style={{
-              background: 'rgba(56, 189, 248, 0.2)',
-              color: '#38bdf8',
-              fontSize: '0.72rem',
-              fontWeight: 700,
-              padding: '0.1rem 0.45rem',
-              borderRadius: '9999px'
-            }}>
-              {documentsCount}
-            </span>
-          )}
-        </button>
+            <button 
+              className={`nav-item ${activeTab === 'knowledge' ? 'active' : ''}`}
+              onClick={() => handleProtectedTabClick('knowledge')}
+              style={{ width: 'auto', borderRadius: '9999px', padding: '0.45rem 1rem', fontSize: '0.85rem' }}
+            >
+              <Database size={15} style={{ color: '#38bdf8' }} />
+              <span>Knowledge Hub</span>
+              {documentsCount > 0 && (
+                <span style={{
+                  background: 'rgba(56, 189, 248, 0.2)',
+                  color: '#38bdf8',
+                  fontSize: '0.72rem',
+                  fontWeight: 700,
+                  padding: '0.1rem 0.45rem',
+                  borderRadius: '9999px'
+                }}>
+                  {documentsCount}
+                </span>
+              )}
+            </button>
 
-        <button 
-          className={`nav-item ${activeTab === 'history' ? 'active' : ''}`}
-          onClick={() => handleProtectedTabClick('history')}
-          style={{ width: 'auto', borderRadius: '9999px', padding: '0.45rem 1rem', fontSize: '0.85rem' }}
-        >
-          <FolderKanban size={15} style={{ color: '#f472b6' }} />
-          <span>Report Archive</span>
-          {reportsCount > 0 && (
-            <span style={{
-              background: 'rgba(244, 114, 182, 0.2)',
-              color: '#f472b6',
-              fontSize: '0.72rem',
-              fontWeight: 700,
-              padding: '0.1rem 0.45rem',
-              borderRadius: '9999px'
-            }}>
-              {reportsCount}
-            </span>
-          )}
-        </button>
+            <button 
+              className={`nav-item ${activeTab === 'history' ? 'active' : ''}`}
+              onClick={() => handleProtectedTabClick('history')}
+              style={{ width: 'auto', borderRadius: '9999px', padding: '0.45rem 1rem', fontSize: '0.85rem' }}
+            >
+              <FolderKanban size={15} style={{ color: '#f472b6' }} />
+              <span>Report Archive</span>
+              {reportsCount > 0 && (
+                <span style={{
+                  background: 'rgba(244, 114, 182, 0.2)',
+                  color: '#f472b6',
+                  fontSize: '0.72rem',
+                  fontWeight: 700,
+                  padding: '0.1rem 0.45rem',
+                  borderRadius: '9999px'
+                }}>
+                  {reportsCount}
+                </span>
+              )}
+            </button>
 
-        <button 
-          className={`nav-item ${activeTab === 'analytics' ? 'active' : ''}`}
-          onClick={() => handleProtectedTabClick('analytics')}
-          style={{ width: 'auto', borderRadius: '9999px', padding: '0.45rem 1rem', fontSize: '0.85rem' }}
-        >
-          <Activity size={15} style={{ color: '#34d399' }} />
-          <span>Analytics</span>
-        </button>
+            <button 
+              className={`nav-item ${activeTab === 'analytics' ? 'active' : ''}`}
+              onClick={() => handleProtectedTabClick('analytics')}
+              style={{ width: 'auto', borderRadius: '9999px', padding: '0.45rem 1rem', fontSize: '0.85rem' }}
+            >
+              <Activity size={15} style={{ color: '#34d399' }} />
+              <span>Analytics</span>
+            </button>
+          </>
+        ) : (
+          <>
+            <button 
+              className={`nav-item ${activeTab === 'landing' ? 'active' : ''}`}
+              onClick={() => setActiveTab('landing')}
+              style={{ width: 'auto', borderRadius: '9999px', padding: '0.45rem 1rem', fontSize: '0.85rem' }}
+            >
+              <Home size={15} style={{ color: '#c084fc' }} />
+              <span>Home</span>
+            </button>
+
+            <button 
+              className={`nav-item ${activeTab === 'features' ? 'active' : ''}`}
+              onClick={() => setActiveTab('features')}
+              style={{ width: 'auto', borderRadius: '9999px', padding: '0.45rem 1rem', fontSize: '0.85rem' }}
+            >
+              <Sparkles size={15} style={{ color: '#38bdf8' }} />
+              <span>Features</span>
+            </button>
+
+            <button 
+              className={`nav-item ${activeTab === 'security' ? 'active' : ''}`}
+              onClick={() => setActiveTab('security')}
+              style={{ width: 'auto', borderRadius: '9999px', padding: '0.45rem 1rem', fontSize: '0.85rem' }}
+            >
+              <ShieldCheck size={15} style={{ color: '#c084fc' }} />
+              <span>Security</span>
+            </button>
+          </>
+        )}
       </nav>
 
       {/* Right Action Controls */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-        {/* Search Input */}
-        <div style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          gap: '0.5rem',
-          background: 'rgba(255, 255, 255, 0.04)',
-          border: '1px solid var(--border-glass)',
-          borderRadius: '9999px',
-          padding: '0.4rem 0.85rem',
-          width: '170px'
-        }}>
-          <Search size={14} style={{ color: 'var(--text-muted)' }} />
-          <input 
-            type="text" 
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            style={{ 
-              background: 'transparent', 
-              border: 'none', 
-              outline: 'none', 
-              color: 'var(--text-main)',
-              fontSize: '0.82rem',
-              width: '100%'
-            }}
-          />
-        </div>
+        {isAuthenticated && (
+          <>
+            {/* Search Input */}
+            <div style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '0.5rem',
+              background: 'rgba(255, 255, 255, 0.04)',
+              border: '1px solid var(--border-glass)',
+              borderRadius: '9999px',
+              padding: '0.4rem 0.85rem',
+              width: '170px'
+            }}>
+              <Search size={14} style={{ color: 'var(--text-muted)' }} />
+              <input 
+                type="text" 
+                placeholder="Search..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                style={{ 
+                  background: 'transparent', 
+                  border: 'none', 
+                  outline: 'none', 
+                  color: 'var(--text-main)',
+                  fontSize: '0.82rem',
+                  width: '100%'
+                }}
+              />
+            </div>
 
-        {/* Upload Button */}
-        <button 
-          className="btn-primary" 
-          onClick={handleProtectedUploadClick}
-          style={{ padding: '0.45rem 0.95rem', borderRadius: '9999px', fontSize: '0.82rem' }}
-        >
-          <Upload size={14} />
-          <span>Upload</span>
-        </button>
+            {/* Upload Button */}
+            <button 
+              className="btn-primary" 
+              onClick={handleProtectedUploadClick}
+              style={{ padding: '0.45rem 0.95rem', borderRadius: '9999px', fontSize: '0.82rem' }}
+            >
+              <Upload size={14} />
+              <span>Upload</span>
+            </button>
+          </>
+        )}
 
         {/* Auth User Profile or Sign In Button */}
         {isAuthenticated ? (
@@ -278,33 +315,49 @@ export function NavbarDock({
                 zIndex: 2000
               }}>
                 <div style={{ padding: '0.5rem 0.75rem', borderBottom: '1px solid var(--border-glass)', marginBottom: '0.5rem' }}>
-                  <div style={{ fontWeight: 700, color: 'var(--text-main)', fontSize: '0.9rem' }}>{user.full_name}</div>
+                  <div style={{ fontWeight: 700, fontSize: '0.88rem', color: '#ffffff' }}>{user.full_name}</div>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>{user.email}</div>
-                  <div style={{ marginTop: '0.35rem' }}>
-                    <Badge variant="purple">{user.role || 'Enterprise Analyst'}</Badge>
-                  </div>
+                  <div style={{ fontSize: '0.7rem', color: '#c084fc', marginTop: '0.25rem', fontWeight: 600 }}>{user.role || 'Enterprise Analyst'}</div>
                 </div>
 
                 <button
-                  onClick={() => { logout(); setShowProfileMenu(false); }}
-                  className="nav-item"
-                  style={{ padding: '0.5rem 0.75rem', color: '#f87171', borderRadius: '8px', fontSize: '0.85rem' }}
+                  onClick={() => {
+                    setShowProfileMenu(false);
+                    logout();
+                    setActiveTab('landing');
+                  }}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    width: '100%',
+                    padding: '0.5rem 0.75rem',
+                    background: 'rgba(239, 68, 68, 0.1)',
+                    color: '#ef4444',
+                    border: 'none',
+                    borderRadius: '8px',
+                    fontSize: '0.82rem',
+                    fontWeight: 600,
+                    cursor: 'pointer'
+                  }}
                 >
-                  <LogOut size={15} />
+                  <LogOut size={14} />
                   <span>Sign Out</span>
                 </button>
               </div>
             )}
           </div>
         ) : (
-          <button
-            onClick={openLoginModal}
-            className="btn-secondary"
-            style={{ borderRadius: '9999px', padding: '0.45rem 0.95rem', fontSize: '0.82rem' }}
-          >
-            <User size={14} style={{ color: '#c084fc' }} />
-            <span>Sign In</span>
-          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <button 
+              className="btn-secondary" 
+              onClick={openLoginModal}
+              style={{ padding: '0.45rem 0.95rem', borderRadius: '9999px', fontSize: '0.82rem' }}
+            >
+              <User size={14} />
+              <span>Sign In</span>
+            </button>
+          </div>
         )}
       </div>
     </header>
